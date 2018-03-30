@@ -48,7 +48,9 @@ Obviously, all network connectivity and parsing is done asynchronously, so block
 It's easy to pass parameters and change HTTP methods using QuickCall
 
 ```swift
-    QuickCall(URL(string: "https://httpbin.org/post")!, method: .post, parameters: ["stringTest": "test", "numberTest": 2])
+QuickCall(URL(string: "https://httpbin.org/post")!,
+        method: .post,
+        parameters: ["stringTest": "test", "numberTest": 2])
 ```
 
 ### Supporting a different content type
@@ -113,7 +115,7 @@ class LoginCall: ServerCall {
         get { return .post }
     }
     
-    override var parameters: [String: Any] {
+    override var parameters: [String: Any]? {
         get { return ["username": username, "password": password] }
     }
 
@@ -123,7 +125,7 @@ class LoginCall: ServerCall {
     }
 }
 
-LoginCall().success { (_) in
+LoginCall("someuser", password: "s3cr4t").success { (_) in
         print("Login succeeded")
     }.failure { (error) in
         print("Login failed")
