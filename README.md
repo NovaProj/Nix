@@ -7,7 +7,7 @@ Nix is an HTTP networking library written in Swift. On top of - already superb A
 
 - [Features](#features)
 - [Requirements](#requirements)
-- [Usage](https://github.com/Alamofire/Alamofire/blob/master/Documentation/Usage.md)
+- [Usage](https://github.com/NovaProj/Nix/blob/master/Documentation/Usage.md)
 - [Communication](#communication)
 - [Installation](#installation)
 - [FAQ](#faq)
