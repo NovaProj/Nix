@@ -1,5 +1,8 @@
 #  NIX - Network Interface eXtension
 
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Nix.svg)](https://img.shields.io/cocoapods/v/Nix.svg)
+[![Platform](https://img.shields.io/cocoapods/p/Nix.svg?style=flat)](https://github.com/NovaProj/Nix)
+
 Nix is an HTTP networking library written in Swift. On top of - already superb Apple solution with URLSession, Nix adds structure to your API connectivity, allowing you to keep your connectivity part of the application clean and easy to change/extend.
 
 - [Features](#features)
@@ -18,7 +21,7 @@ Nix is an HTTP networking library written in Swift. On top of - already superb A
 
 ## Requirements
 
-- iOS 8.0+ / macOS 10.10+ / tvOS 9.0+ / watchOS 2.0+
+- iOS 10.0+ / macOS 10.10+ / tvOS 9.0+ / watchOS 2.0+
 - Xcode 8.3+
 - Swift 3.1+
 
