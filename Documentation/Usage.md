@@ -7,7 +7,7 @@
 ```swift
 import Nix
 
-QuickCall(URL("https://httpbin.org/get")!)
+QuickCall(URL("string: https://httpbin.org/get")!)
 ```
 
 This will simply call a given url. Simple as that. Call will be triggered automatically.
@@ -18,7 +18,7 @@ QuickCall allows you to simply call an API and receive a response that will be a
 
 ```swift
 
-QuickCall(URL("https://httpbin.org/get")!).success { (data) in
+QuickCall(URL(string: "https://httpbin.org/get")!).success { (data) in
 
     print("JSON: \(data)")
     
