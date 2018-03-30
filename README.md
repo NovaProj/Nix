@@ -104,11 +104,11 @@ $ git submodule add https://github.com/NovaProj/Nix.git
 
 ### Why Nix?
 
-Why the name? Because Apple already has a great tool for any network connectivity. It just needed a bit of a final touch so all the code you make for your calls are structured, understandable and in one place. It's very basic and will get more functions in time (more about it in [TODO](#todo) section). But it's main aim is to be simple and structured.
+Because Apple already has a great tool for any network connectivity. It just needed a bit of a final touch so all the code you make for your calls are structured, understandable and in one place. It's very basic and will get more functions in time (more about it in [TODO](#todo) section). But it's main aim is to be simple and structured.
 
 ### What's wrong with other libraries out there?
 
-There's nothing wrong with them. I myself was using [Alamofire](https://github.com/Alamofire/Alamofire) most of my Swift life. Fact is, that Alamofire was a product of necessity when URLSession wasn't as pretty as it is now. And with time, I have found out that I don't really get how Alamofire does things. I hate not to know.
+There's nothing wrong with them. I myself was using [Alamofire](https://github.com/Alamofire/Alamofire) most of my Swift life. Fact is, that Alamofire was a product of necessity when URLSession wasn't as pretty as it is now. And with time, I have found out that I don't really get how Alamofire does things. The code of Alamofire is far from being clear. And it's very difficult to find usage quirks. In fact - with time Alamofire started to be more and more obsolete.
 
 At the end of the day, most of the projects I was doing lacked the structure for internet calls. As much as most libraries gives you functions, they lack most important element that Apple brings with their Foundation and UIKit - structure. And that's the reason for Nix.
 
