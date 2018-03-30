@@ -80,6 +80,7 @@
 		D945C067206E414300679E3B /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		D945C069206E417F00679E3B /* .swift-version */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".swift-version"; sourceTree = SOURCE_ROOT; };
 		D945C06B206E41DB00679E3B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		D945C06C206E5E3600679E3B /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 		D997E926200504AC001B4537 /* NixEncodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NixEncodingTests.swift; sourceTree = "<group>"; };
 		D9D4C7C91F82572A000CC35A /* Nix iOS Test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nix iOS Test.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D4C7CB1F82572A000CC35A /* Nix_iOS_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nix_iOS_Test.swift; sourceTree = "<group>"; };
@@ -189,6 +190,7 @@
 				D945C067206E414300679E3B /* LICENSE */,
 				D945C069206E417F00679E3B /* .swift-version */,
 				D945C06B206E41DB00679E3B /* README.md */,
+				D945C06C206E5E3600679E3B /* .travis.yml */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
