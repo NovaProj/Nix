@@ -74,7 +74,7 @@ $ git init
 - Add Alamofire as a git [submodule](http://git-scm.com/docs/git-submodule) by running the following command:
 
 ```bash
-$ git submodule add https://github.com/Nix/Nix.git
+$ git submodule add https://github.com/NovaProj/Nix.git
 ```
 
 - Open the new `Nix` folder, and drag the `Nix.xcodeproj` into the Project Navigator of your application's Xcode project.
