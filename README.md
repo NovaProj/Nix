@@ -39,9 +39,9 @@ Nix is an HTTP networking library written in Swift. On top of - already superb A
 $ gem install cocoapods
 ```
 
-> CocoaPods 1.1+ is required to build Alamofire 4.0+.
+> CocoaPods 1.1+ is required to build Nix
 
-To integrate Alamofire into your Xcode project using CocoaPods, specify it in your `Podfile`:
+To integrate Nix into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
@@ -61,7 +61,7 @@ $ pod install
 
 ### Manually
 
-If you prefer not to use any of the aforementioned dependency managers, you can integrate Alamofire into your project manually.
+If you prefer not to use any of the aforementioned dependency managers, you can integrate Nix into your project manually.
 
 #### Embedded Framework
 
@@ -71,7 +71,7 @@ If you prefer not to use any of the aforementioned dependency managers, you can 
 $ git init
 ```
 
-- Add Alamofire as a git [submodule](http://git-scm.com/docs/git-submodule) by running the following command:
+- Add Nix as a git [submodule](http://git-scm.com/docs/git-submodule) by running the following command:
 
 ```bash
 $ git submodule add https://github.com/NovaProj/Nix.git
