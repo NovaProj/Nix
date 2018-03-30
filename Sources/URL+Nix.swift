@@ -1,0 +1,39 @@
+//
+//  URL+Nix.swift
+//  Nix
+//
+//  Created by Bazyli Zygan on 02.10.2017.
+//  Copyright © 2017 Nova Project. All rights reserved.
+//
+
+extension URL {
+    
+    var baseURLString: String? {
+        get {
+            var urlString = self.absoluteString
+            // Strip parameters if they are there
+            let paramsRange = urlString.range(of: "?")
+            if !(paramsRange?.isEmpty ?? true) {
+                urlString = String(urlString[..<paramsRange!.lowerBound])
+            }
+            var schemeLen = self.scheme?.count ?? 0
+            if schemeLen > 0 {
+                schemeLen += 3
+            }
+            // Simple sanity - just in case
+            if schemeLen > 0 {
+                urlString = urlString[schemeLen..<urlString.count]
+            }
+            
+            let pathRange = urlString.range(of: "/")
+            if !(pathRange?.isEmpty ?? true) {
+                urlString = String(urlString[..<pathRange!.lowerBound])
+            }
+            if self.scheme != nil {
+                return self.scheme! + "://" + urlString
+            } else {
+                return urlString
+            }
+        }
+    }
+}
