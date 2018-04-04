@@ -73,7 +73,7 @@
 		D92A5E971F5D8FC800B712FE /* NixManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NixManager.swift; sourceTree = "<group>"; };
 		D92A5E9C1F5D906300B712FE /* ServerCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerCall.swift; sourceTree = "<group>"; };
 		D945C044206E31A100679E3B /* NixSequencedCallsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NixSequencedCallsTest.swift; sourceTree = "<group>"; };
-		D945C047206E3C6E00679E3B /* Nix.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Nix.podspec; sourceTree = SOURCE_ROOT; };
+		D945C047206E3C6E00679E3B /* Nix.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Nix.podspec; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D945C067206E414300679E3B /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		D945C069206E417F00679E3B /* .swift-version */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".swift-version"; sourceTree = SOURCE_ROOT; };
 		D945C06B206E41DB00679E3B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
