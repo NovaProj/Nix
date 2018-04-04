@@ -8,13 +8,13 @@
 
 open class ResponseDecoding {
     
-    var contentType: String {
+    open var contentType: String {
         get {
             return "application/x-octet-stream"
         }
     }
     
-    init() {
+    public init() {
         
     }
 
@@ -26,7 +26,7 @@ open class ResponseDecoding {
 
 open class JSONDecoding: ResponseDecoding {
     
-    override var contentType: String {
+    override open var contentType: String {
         get {
             return "application/json"
         }
@@ -38,7 +38,7 @@ open class JSONDecoding: ResponseDecoding {
 }
 
 open class XMLDecoding: ResponseDecoding {
-    override var contentType: String {
+    override open var contentType: String {
         get {
             return "application/xml"
         }

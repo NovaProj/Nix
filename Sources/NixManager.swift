@@ -18,6 +18,8 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate {
         return NixManager()
     }()
     
+    open var trustDelegate: NixTrustDelegate? = nil
+    
     public override init() {
         super.init()
         defaultSession = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
@@ -73,7 +75,32 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate {
             tasks[dataTask]?.data = data
         }
     }
-
+    
+    public func urlSession(
+        _ session: URLSession,
+        didReceive challenge: URLAuthenticationChallenge,
+        completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
+    {
+        var disposition: URLSession.AuthChallengeDisposition = .performDefaultHandling
+        var credential: URLCredential?
+        
+        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+            let host = challenge.protectionSpace.host
+            
+            if
+                (trustDelegate?.nixManager(self, shouldTrustHost: host) ?? false),
+                let serverTrust = challenge.protectionSpace.serverTrust
+            {
+                disposition = .useCredential
+                credential = URLCredential(trust: serverTrust)
+            } else {
+                disposition = .cancelAuthenticationChallenge
+            }
+        }
+        
+        completionHandler(disposition, credential)
+    }
+    
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         // Unload data from savers
         let call = tasks.removeValue(forKey: task)
@@ -84,7 +111,12 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate {
             let cT = headers?["Content-Type"] ?? headers?["Content-type"] ?? headers?["content-type"]
             
             if cT is String {
-                let decoder = decoders[(cT as! String).lowercased()]
+                // It might be, that cT has additional parameters attached - we ditch them for now
+                var contentType = cT as! String
+                if let semiRange = contentType.range(of: ";") {
+                    contentType.removeSubrange(semiRange.lowerBound..<contentType.endIndex)
+                }
+                let decoder = decoders[contentType.lowercased()]
                 
                 do {
                     call?.responseObject = try decoder?.decode(call!.data!)

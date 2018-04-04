@@ -19,12 +19,13 @@ Nix is an HTTP networking library written in Swift. On top of - already superb A
 - [x] Chainable Request / Response Methods
 - [x] URL / JSON
 - [x] HTTP Response Validation
+- [x] Documentation
 
 ## Requirements
 
 - iOS 10.0+ / macOS 10.10+ / tvOS 9.0+ / watchOS 2.0+
-- Xcode 8.3+
-- Swift 3.1+
+- Xcode 9.3+
+- Swift 4.0+
 
 ## Communication
 - If you **need help**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/nixswift). (Tag 'nixswift')
@@ -121,7 +122,6 @@ There's a lot of things that still has to be implemented in Nix. Most important 
 - [ ] Upload and Download Progress Closures with Progress
 - [ ] Authentication with URLCredential
 - [ ] Network Reachability
-- [ ] Documentation
 - [ ] More tests
 
 ## License
