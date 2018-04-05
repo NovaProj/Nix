@@ -79,8 +79,13 @@ open class URLEncoding: ParameterEncoding {
             queryString = components.joined(separator: "&")
             
             if queryString.count > 0 {
-                let redefinedUrl = URL(string: request.url!.absoluteString + "?" + queryString)
-                request.url = redefinedUrl
+                if call.method == .get {
+                    let redefinedUrl = URL(string: request.url!.absoluteString + "?" + queryString)
+                    request.url = redefinedUrl
+                } else {
+                    request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+                    request.httpBody = queryString.data(using: .utf8)
+                }
             }
         }
         
