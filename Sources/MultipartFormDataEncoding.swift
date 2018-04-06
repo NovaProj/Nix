@@ -1,0 +1,291 @@
+//
+//  MultipartFormDataEncoding.swift
+//  Nix
+//
+//  Created by Bazyli Zygan on 06.04.2018.
+//  Copyright © 2018 Nova Project. All rights reserved.
+//
+
+import UIKit
+
+internal let mimeTypes = [
+    "html": "text/html",
+    "htm": "text/html",
+    "shtml": "text/html",
+    "css": "text/css",
+    "xml": "text/xml",
+    "gif": "image/gif",
+    "jpeg": "image/jpeg",
+    "jpg": "image/jpeg",
+    "js": "application/javascript",
+    "atom": "application/atom+xml",
+    "rss": "application/rss+xml",
+    "mml": "text/mathml",
+    "txt": "text/plain",
+    "jad": "text/vnd.sun.j2me.app-descriptor",
+    "wml": "text/vnd.wap.wml",
+    "htc": "text/x-component",
+    "png": "image/png",
+    "tif": "image/tiff",
+    "tiff": "image/tiff",
+    "wbmp": "image/vnd.wap.wbmp",
+    "ico": "image/x-icon",
+    "jng": "image/x-jng",
+    "bmp": "image/x-ms-bmp",
+    "svg": "image/svg+xml",
+    "svgz": "image/svg+xml",
+    "webp": "image/webp",
+    "woff": "application/font-woff",
+    "jar": "application/java-archive",
+    "war": "application/java-archive",
+    "ear": "application/java-archive",
+    "json": "application/json",
+    "hqx": "application/mac-binhex40",
+    "doc": "application/msword",
+    "pdf": "application/pdf",
+    "ps": "application/postscript",
+    "eps": "application/postscript",
+    "ai": "application/postscript",
+    "rtf": "application/rtf",
+    "m3u8": "application/vnd.apple.mpegurl",
+    "xls": "application/vnd.ms-excel",
+    "eot": "application/vnd.ms-fontobject",
+    "ppt": "application/vnd.ms-powerpoint",
+    "wmlc": "application/vnd.wap.wmlc",
+    "kml": "application/vnd.google-earth.kml+xml",
+    "kmz": "application/vnd.google-earth.kmz",
+    "7z": "application/x-7z-compressed",
+    "cco": "application/x-cocoa",
+    "jardiff": "application/x-java-archive-diff",
+    "jnlp": "application/x-java-jnlp-file",
+    "run": "application/x-makeself",
+    "pl": "application/x-perl",
+    "pm": "application/x-perl",
+    "prc": "application/x-pilot",
+    "pdb": "application/x-pilot",
+    "rar": "application/x-rar-compressed",
+    "rpm": "application/x-redhat-package-manager",
+    "sea": "application/x-sea",
+    "swf": "application/x-shockwave-flash",
+    "sit": "application/x-stuffit",
+    "tcl": "application/x-tcl",
+    "tk": "application/x-tcl",
+    "der": "application/x-x509-ca-cert",
+    "pem": "application/x-x509-ca-cert",
+    "crt": "application/x-x509-ca-cert",
+    "xpi": "application/x-xpinstall",
+    "xhtml": "application/xhtml+xml",
+    "xspf": "application/xspf+xml",
+    "zip": "application/zip",
+    "docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    "mid": "audio/midi",
+    "midi": "audio/midi",
+    "kar": "audio/midi",
+    "mp3": "audio/mpeg",
+    "ogg": "audio/ogg",
+    "m4a": "audio/x-m4a",
+    "ra": "audio/x-realaudio",
+    "3gpp": "video/3gpp",
+    "3gp": "video/3gpp",
+    "ts": "video/mp2t",
+    "mp4": "video/mp4",
+    "mpeg": "video/mpeg",
+    "mpg": "video/mpeg",
+    "mov": "video/quicktime",
+    "webm": "video/webm",
+    "flv": "video/x-flv",
+    "m4v": "video/x-m4v",
+    "mng": "video/x-mng",
+    "asx": "video/x-ms-asf",
+    "asf": "video/x-ms-asf",
+    "wmv": "video/x-ms-wmv",
+    "avi": "video/x-msvideo"
+]
+
+class MultipartFormDataStream: InputStream, StreamDelegate {
+    private var streams = [InputStream]()
+    
+    let boundary: String = "NixBoundary" + String(randomWithLength: 20)
+    
+    override var hasBytesAvailable: Bool {
+        if let stream = streams.first {
+            return stream.hasBytesAvailable
+        } else {
+            return false
+        }
+    }
+    
+    private var _delegate: StreamDelegate?
+    override var delegate: StreamDelegate? {
+        get {
+            return _delegate
+        }
+        set {
+            _delegate = newValue
+            streams.first?.delegate = self
+        }
+    }
+    
+    override var streamStatus: Stream.Status {
+        return streams.first?.streamStatus ?? .atEnd
+    }
+    
+    override var streamError: Error? {
+        return streams.first?.streamError
+    }
+    
+    init(_ parameters: [String: Any]) throws {
+        
+        // Right! In order to do it right, we need to prepare all
+        // Parameters to be read
+        // That means creating headers for every each one of them
+        // And if one of them is.. well... bad, we need to throw an error
+        var first = true
+        for (key, value) in parameters {
+            var stream: InputStream? = nil
+            var filename: String? = nil
+            var contentType: String? = nil
+            
+            if let bool = value as? Bool {
+                stream = InputStream(data: ((bool) ? "true" : "false").data(using: .utf8) ?? Data())
+            } else if let number = value as? NSNumber {
+                stream = InputStream(data: number.stringValue.data(using: .utf8) ?? Data())
+            } else if let string = value as? String {
+                stream = InputStream(data: string.data(using: .utf8) ?? Data())
+            } else if let data = value as? Data {
+                stream = InputStream(data: data)
+            } else  if let fileUrl = value as? URL {
+                if fileUrl.isFileURL {
+                    filename = fileUrl.lastPathComponent
+                    stream = InputStream(url: fileUrl)
+                    contentType = mimeTypes[fileUrl.pathExtension] ?? "application/octet-stream"
+                }
+            } else if let theStream = value as? InputStream {
+                stream = theStream
+            }
+            
+            if stream == nil {
+                throw NixError.invalidParameters([key: value])
+            } else {
+                var headerString = ""
+                
+                if first {
+                    first = false
+                } else {
+                    headerString += "\r\n"
+                }
+                headerString += "--\(boundary)\r\n"
+                
+                headerString += "Content-Disposition: form-data; name=\"\(key)\""
+                if filename != nil {
+                    headerString += "; filename=\"\(filename!)\""
+                }
+                headerString += "\r\n"
+                if contentType != nil {
+                    headerString += "Content-Type: \(contentType!)\r\n"
+                }
+                headerString += "\r\n"
+
+                let headerStream = InputStream(data: headerString.data(using: .utf8) ?? Data())
+                streams.append(headerStream)
+                streams.append(stream!)
+            }
+        }
+        
+        // Last but not least - we need to append final boundary
+        streams.append(InputStream(data: "\r\n--\(boundary)--".data(using: .utf8) ?? Data()))
+        
+        super.init(data: Data())
+    }
+    
+    override func open() {
+        streams.first?.open()
+    }
+    
+    override func close() {
+        streams.first?.close()
+    }
+    
+    override func schedule(in aRunLoop: RunLoop, forMode mode: RunLoopMode) {
+        for s in streams {
+            s.schedule(in: aRunLoop, forMode: mode)
+        }
+    }
+    
+    override func remove(from aRunLoop: RunLoop, forMode mode: RunLoopMode) {
+        for s in streams {
+            s.remove(from: aRunLoop, forMode: mode)
+        }
+    }
+    
+    override func property(forKey key: Stream.PropertyKey) -> Any? {
+        return streams.first?.property(forKey: key)
+    }
+    
+    override func read(_ buffer: UnsafeMutablePointer<UInt8>, maxLength len: Int) -> Int {
+        
+        let readLen = streams.first?.read(buffer, maxLength: len) ?? 0
+        switchStreamsIfNeeded()
+        
+        print(String(data: Data(bytes: buffer, count: readLen), encoding: .utf8)!)
+        return readLen
+    }
+    
+    func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
+        switch eventCode {
+            case .errorOccurred:
+                _delegate?.stream?(self, handle: .errorOccurred)
+                break
+            case .endEncountered:
+                if !switchStreamsIfNeeded(true) {
+                    _delegate?.stream?(self, handle: .endEncountered)
+                }
+                break
+            default:
+                break
+        }
+    }
+    
+     @discardableResult private func switchStreamsIfNeeded(_ force: Bool = false) -> Bool {
+        if (!(streams.first?.hasBytesAvailable ?? false) || force) && streams.count > 1 {
+            streams.first?.delegate = nil
+            streams.first?.close()
+            streams.removeFirst()
+            streams.first?.open()
+            streams.first?.delegate = self
+            return true
+        }
+        return false
+    }
+}
+
+class MultipartFormDataEncoding: ParameterEncoding {
+
+    open static var `default`: MultipartFormDataEncoding { return MultipartFormDataEncoding() }
+    
+    open override func encode(_ call: ServerCall) throws -> URLRequest {
+        
+        
+        // We need to create a proper stream for encoding data. Mainly to allow users to send streams using multipart/form-data
+        // In order to do it correctly, whole thing has to be a stream.
+        // In other words - here we just check if all parameters sent here are proper and then we pass a stream to
+        // request itself so it can handle it as it wishes
+        var request = try super.encode(call)
+        
+        if call.method == .get {
+            throw NixError.invalidCallMethod
+        }
+        
+        if call.parameters?.count ?? 0 == 0 {
+            throw NixError.invalidParameters([String: Any]())
+        }
+        
+        let stream = try MultipartFormDataStream(call.parameters!)
+        request.addValue("multipart/form-data; boundary=\(stream.boundary)", forHTTPHeaderField: "Content-Type")
+        request.httpBodyStream = stream
+        
+        return request
+    }
+}

@@ -46,16 +46,6 @@ class InitialCall: TestCall {
 
 class NixSequencedCallsTest: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-
     func testNestedCall() {
         let successExpectation = self.expectation(description: "Call should finish with the success")
         let responseExpectation = self.expectation(description: "Call should finish after nested call has all results")

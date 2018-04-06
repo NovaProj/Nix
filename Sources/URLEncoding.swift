@@ -8,10 +8,6 @@
 
 import Foundation
 
-extension NSNumber {
-    fileprivate var isBool: Bool { return CFBooleanGetTypeID() == CFGetTypeID(self) }
-}
-
 open class ParameterEncoding {
     
     init() {
@@ -58,7 +54,6 @@ open class URLEncoding: ParameterEncoding {
         
         var request = try super.encode(call)
         
-        
         var queryString = ""
         var components = [String]()
         if call.parameters != nil {
@@ -71,8 +66,10 @@ open class URLEncoding: ParameterEncoding {
                     }
                 } else if let bool = value as? Bool {
                     components.append("\(escape(key))=\(escape((bool ? "1" : "0")))")
+                } else if let string = value as? String {
+                    components.append("\(escape(key))=\(escape("\(string)"))")
                 } else {
-                    components.append("\(escape(key))=\(escape("\(value)"))")
+                    throw NixError.invalidParameters([key: value])
                 }
             }
             

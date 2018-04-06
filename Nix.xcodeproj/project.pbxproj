@@ -25,6 +25,21 @@
 		D92A5EA01F5D906300B712FE /* ServerCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92A5E9C1F5D906300B712FE /* ServerCall.swift */; };
 		D945C045206E31A100679E3B /* NixSequencedCallsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D945C044206E31A100679E3B /* NixSequencedCallsTest.swift */; };
 		D997E927200504AD001B4537 /* NixEncodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D997E926200504AC001B4537 /* NixEncodingTests.swift */; };
+		D9D45E52207810B800C83944 /* MultipartFormDataEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D45E51207810B800C83944 /* MultipartFormDataEncoding.swift */; };
+		D9D45E53207810B800C83944 /* MultipartFormDataEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D45E51207810B800C83944 /* MultipartFormDataEncoding.swift */; };
+		D9D45E54207810B800C83944 /* MultipartFormDataEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D45E51207810B800C83944 /* MultipartFormDataEncoding.swift */; };
+		D9D45E55207810B800C83944 /* MultipartFormDataEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D45E51207810B800C83944 /* MultipartFormDataEncoding.swift */; };
+		D9D45E58207811C000C83944 /* NSNumber+Nix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D45E57207811C000C83944 /* NSNumber+Nix.swift */; };
+		D9D45E59207811C000C83944 /* NSNumber+Nix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D45E57207811C000C83944 /* NSNumber+Nix.swift */; };
+		D9D45E5A207811C000C83944 /* NSNumber+Nix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D45E57207811C000C83944 /* NSNumber+Nix.swift */; };
+		D9D45E5B207811C000C83944 /* NSNumber+Nix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D45E57207811C000C83944 /* NSNumber+Nix.swift */; };
+		D9D45E5C207811C000C83944 /* NSNumber+Nix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D45E57207811C000C83944 /* NSNumber+Nix.swift */; };
+		D9D45E5E2078122200C83944 /* NixTrustDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D45E5D2078122200C83944 /* NixTrustDelegate.swift */; };
+		D9D45E5F2078122200C83944 /* NixTrustDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D45E5D2078122200C83944 /* NixTrustDelegate.swift */; };
+		D9D45E602078122200C83944 /* NixTrustDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D45E5D2078122200C83944 /* NixTrustDelegate.swift */; };
+		D9D45E612078122200C83944 /* NixTrustDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D45E5D2078122200C83944 /* NixTrustDelegate.swift */; };
+		D9D45E6420781C8400C83944 /* NixMultipartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D45E6320781C8400C83944 /* NixMultipartTests.swift */; };
+		D9D45E67207830BC00C83944 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = D9D45E66207830BC00C83944 /* test.html */; };
 		D9D4C7CC1F82572A000CC35A /* Nix_iOS_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D4C7CB1F82572A000CC35A /* Nix_iOS_Test.swift */; };
 		D9D4C7CE1F82572A000CC35A /* Nix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92A5E241F5D3AF100B712FE /* Nix.framework */; };
 		D9D4C7D41F825733000CC35A /* NixBasicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92A5E881F5D87F200B712FE /* NixBasicTests.swift */; };
@@ -80,6 +95,11 @@
 		D945C06C206E5E3600679E3B /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 		D945C06E206E64A900679E3B /* Usage.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Usage.md; sourceTree = "<group>"; };
 		D997E926200504AC001B4537 /* NixEncodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NixEncodingTests.swift; sourceTree = "<group>"; };
+		D9D45E51207810B800C83944 /* MultipartFormDataEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormDataEncoding.swift; sourceTree = "<group>"; };
+		D9D45E57207811C000C83944 /* NSNumber+Nix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNumber+Nix.swift"; sourceTree = "<group>"; };
+		D9D45E5D2078122200C83944 /* NixTrustDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NixTrustDelegate.swift; sourceTree = "<group>"; };
+		D9D45E6320781C8400C83944 /* NixMultipartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NixMultipartTests.swift; sourceTree = "<group>"; };
+		D9D45E66207830BC00C83944 /* test.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 		D9D4C7C91F82572A000CC35A /* Nix iOS Test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nix iOS Test.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D4C7CB1F82572A000CC35A /* Nix_iOS_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nix_iOS_Test.swift; sourceTree = "<group>"; };
 		D9D4C7CD1F82572A000CC35A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -164,9 +184,12 @@
 				D92A5E9C1F5D906300B712FE /* ServerCall.swift */,
 				D9F1AA1B1F616A13007B081F /* QuickCall.swift */,
 				D9F1AA251F61847A007B081F /* URLEncoding.swift */,
+				D9D45E51207810B800C83944 /* MultipartFormDataEncoding.swift */,
 				D9D4C7DF1F826BF4000CC35A /* ResponseDecoding.swift */,
 				D9D4C7D51F825F97000CC35A /* String+Nix.swift */,
 				D9D4C7DA1F825FE8000CC35A /* URL+Nix.swift */,
+				D9D45E57207811C000C83944 /* NSNumber+Nix.swift */,
+				D9D45E5D2078122200C83944 /* NixTrustDelegate.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -178,6 +201,8 @@
 				D92A5E881F5D87F200B712FE /* NixBasicTests.swift */,
 				D997E926200504AC001B4537 /* NixEncodingTests.swift */,
 				D945C044206E31A100679E3B /* NixSequencedCallsTest.swift */,
+				D9D45E6320781C8400C83944 /* NixMultipartTests.swift */,
+				D9D45E66207830BC00C83944 /* test.html */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -429,6 +454,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9D45E67207830BC00C83944 /* test.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,13 +465,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9D45E52207810B800C83944 /* MultipartFormDataEncoding.swift in Sources */,
 				D9D4C7D61F825F97000CC35A /* String+Nix.swift in Sources */,
 				D92A5E931F5D8B3600B712FE /* Nix.swift in Sources */,
+				D9D45E58207811C000C83944 /* NSNumber+Nix.swift in Sources */,
 				D92A5E981F5D8FC800B712FE /* NixManager.swift in Sources */,
 				D9D4C7DB1F825FE8000CC35A /* URL+Nix.swift in Sources */,
 				D92A5E9D1F5D906300B712FE /* ServerCall.swift in Sources */,
 				D9D4C7E01F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
 				D9F1AA261F61847A007B081F /* URLEncoding.swift in Sources */,
+				D9D45E5E2078122200C83944 /* NixTrustDelegate.swift in Sources */,
 				D9F1AA1C1F616A13007B081F /* QuickCall.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,13 +483,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9D45E53207810B800C83944 /* MultipartFormDataEncoding.swift in Sources */,
 				D9D4C7D71F825F97000CC35A /* String+Nix.swift in Sources */,
 				D92A5E941F5D8B3600B712FE /* Nix.swift in Sources */,
+				D9D45E59207811C000C83944 /* NSNumber+Nix.swift in Sources */,
 				D92A5E991F5D8FC800B712FE /* NixManager.swift in Sources */,
 				D9D4C7DC1F825FE8000CC35A /* URL+Nix.swift in Sources */,
 				D92A5E9E1F5D906300B712FE /* ServerCall.swift in Sources */,
 				D9D4C7E11F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
 				D9F1AA271F61847A007B081F /* URLEncoding.swift in Sources */,
+				D9D45E5F2078122200C83944 /* NixTrustDelegate.swift in Sources */,
 				D9F1AA1D1F616A13007B081F /* QuickCall.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -469,13 +501,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9D45E54207810B800C83944 /* MultipartFormDataEncoding.swift in Sources */,
 				D9D4C7D81F825F97000CC35A /* String+Nix.swift in Sources */,
 				D92A5E951F5D8B3600B712FE /* Nix.swift in Sources */,
+				D9D45E5A207811C000C83944 /* NSNumber+Nix.swift in Sources */,
 				D92A5E9A1F5D8FC800B712FE /* NixManager.swift in Sources */,
 				D9D4C7DD1F825FE8000CC35A /* URL+Nix.swift in Sources */,
 				D92A5E9F1F5D906300B712FE /* ServerCall.swift in Sources */,
 				D9D4C7E21F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
 				D9F1AA281F61847A007B081F /* URLEncoding.swift in Sources */,
+				D9D45E602078122200C83944 /* NixTrustDelegate.swift in Sources */,
 				D9F1AA1E1F616A13007B081F /* QuickCall.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,13 +519,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9D45E55207810B800C83944 /* MultipartFormDataEncoding.swift in Sources */,
 				D9D4C7D91F825F97000CC35A /* String+Nix.swift in Sources */,
 				D92A5E961F5D8B3600B712FE /* Nix.swift in Sources */,
+				D9D45E5B207811C000C83944 /* NSNumber+Nix.swift in Sources */,
 				D92A5E9B1F5D8FC800B712FE /* NixManager.swift in Sources */,
 				D9D4C7DE1F825FE8000CC35A /* URL+Nix.swift in Sources */,
 				D92A5EA01F5D906300B712FE /* ServerCall.swift in Sources */,
 				D9D4C7E31F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
 				D9F1AA291F61847A007B081F /* URLEncoding.swift in Sources */,
+				D9D45E612078122200C83944 /* NixTrustDelegate.swift in Sources */,
 				D9F1AA1F1F616A13007B081F /* QuickCall.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -499,9 +537,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9D45E6420781C8400C83944 /* NixMultipartTests.swift in Sources */,
 				D997E927200504AD001B4537 /* NixEncodingTests.swift in Sources */,
 				D945C045206E31A100679E3B /* NixSequencedCallsTest.swift in Sources */,
 				D9D4C7D41F825733000CC35A /* NixBasicTests.swift in Sources */,
+				D9D45E5C207811C000C83944 /* NSNumber+Nix.swift in Sources */,
 				D9D4C7CC1F82572A000CC35A /* Nix_iOS_Test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

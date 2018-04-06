@@ -21,9 +21,7 @@ open class ServerCall {
         case download = "download"
         case upload = "upload"
     }
-    
-    open var executeOnCreate: Bool = true
-    
+        
     open var userAgent: String {
         get {
             return "Nix/1.0"
@@ -83,12 +81,16 @@ open class ServerCall {
     public var failureBlock: ((Error) -> Void)? = nil
     public var finalBlock: ((Bool) -> Void)? = nil
     
-    public init() {
-        if executeOnCreate {
+    
+    public init(executeNow: Bool = true) {
+        if executeNow {
             DispatchQueue.main.async {
                 do {
                     try self.execute()
-                } catch {}
+                } catch let error {
+                    self.failureBlock?(error)
+                    self.finalBlock?(false)
+                }
             }
         }
     }

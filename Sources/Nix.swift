@@ -27,6 +27,7 @@ public enum NixError: Error {
     case wrongURL
     case alreadyRunning
     case invalidParameters([String: Any])
+    case invalidCallMethod
     case timeout(URL)
     case unknown
 }
