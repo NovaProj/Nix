@@ -6,7 +6,7 @@
 //  Copyright © 2018 Nova Project. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 internal let mimeTypes = [
     "html": "text/html",
