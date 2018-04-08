@@ -226,10 +226,13 @@ class MultipartFormDataStream: InputStream, StreamDelegate {
     
     override func read(_ buffer: UnsafeMutablePointer<UInt8>, maxLength len: Int) -> Int {
         
-        let readLen = streams.first?.read(buffer, maxLength: len) ?? 0
-        switchStreamsIfNeeded()
+        var readLen: Int = 0
+        repeat {
+             readLen = streams.first?.read(buffer, maxLength: len) ?? 0
         
-        print(String(data: Data(bytes: buffer, count: readLen), encoding: .utf8)!)
+            switchStreamsIfNeeded()
+        } while (readLen == 0 && streams.count > 1)
+        
         return readLen
     }
     
@@ -237,11 +240,6 @@ class MultipartFormDataStream: InputStream, StreamDelegate {
         switch eventCode {
             case .errorOccurred:
                 _delegate?.stream?(self, handle: .errorOccurred)
-                break
-            case .endEncountered:
-                if !switchStreamsIfNeeded(true) {
-                    _delegate?.stream?(self, handle: .endEncountered)
-                }
                 break
             default:
                 break
