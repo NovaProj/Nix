@@ -26,6 +26,10 @@
 		D945C045206E31A100679E3B /* NixSequencedCallsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D945C044206E31A100679E3B /* NixSequencedCallsTest.swift */; };
 		D959E76F207B81630047A958 /* NixProgressTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D959E76E207B81630047A958 /* NixProgressTest.swift */; };
 		D997E927200504AD001B4537 /* NixEncodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D997E926200504AC001B4537 /* NixEncodingTests.swift */; };
+		D9D1CE0A207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D1CE09207B9C3F00684FAD /* OutputStream+Nix.swift */; };
+		D9D1CE0B207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D1CE09207B9C3F00684FAD /* OutputStream+Nix.swift */; };
+		D9D1CE0C207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D1CE09207B9C3F00684FAD /* OutputStream+Nix.swift */; };
+		D9D1CE0D207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D1CE09207B9C3F00684FAD /* OutputStream+Nix.swift */; };
 		D9D45E52207810B800C83944 /* MultipartFormDataEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D45E51207810B800C83944 /* MultipartFormDataEncoding.swift */; };
 		D9D45E53207810B800C83944 /* MultipartFormDataEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D45E51207810B800C83944 /* MultipartFormDataEncoding.swift */; };
 		D9D45E54207810B800C83944 /* MultipartFormDataEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D45E51207810B800C83944 /* MultipartFormDataEncoding.swift */; };
@@ -96,6 +100,7 @@
 		D945C06E206E64A900679E3B /* Usage.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Usage.md; sourceTree = "<group>"; };
 		D959E76E207B81630047A958 /* NixProgressTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NixProgressTest.swift; sourceTree = "<group>"; };
 		D997E926200504AC001B4537 /* NixEncodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NixEncodingTests.swift; sourceTree = "<group>"; };
+		D9D1CE09207B9C3F00684FAD /* OutputStream+Nix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OutputStream+Nix.swift"; sourceTree = "<group>"; };
 		D9D45E51207810B800C83944 /* MultipartFormDataEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormDataEncoding.swift; sourceTree = "<group>"; };
 		D9D45E57207811C000C83944 /* NSNumber+Nix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNumber+Nix.swift"; sourceTree = "<group>"; };
 		D9D45E5D2078122200C83944 /* NixTrustDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NixTrustDelegate.swift; sourceTree = "<group>"; };
@@ -188,6 +193,7 @@
 				D9D4C7DF1F826BF4000CC35A /* ResponseDecoding.swift */,
 				D9D4C7D51F825F97000CC35A /* String+Nix.swift */,
 				D9D4C7DA1F825FE8000CC35A /* URL+Nix.swift */,
+				D9D1CE09207B9C3F00684FAD /* OutputStream+Nix.swift */,
 				D9D45E57207811C000C83944 /* NSNumber+Nix.swift */,
 				D9D45E5D2078122200C83944 /* NixTrustDelegate.swift */,
 			);
@@ -473,6 +479,7 @@
 				D9D4C7DB1F825FE8000CC35A /* URL+Nix.swift in Sources */,
 				D92A5E9D1F5D906300B712FE /* ServerCall.swift in Sources */,
 				D9D4C7E01F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
+				D9D1CE0A207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */,
 				D9F1AA261F61847A007B081F /* URLEncoding.swift in Sources */,
 				D9D45E5E2078122200C83944 /* NixTrustDelegate.swift in Sources */,
 				D9F1AA1C1F616A13007B081F /* QuickCall.swift in Sources */,
@@ -491,6 +498,7 @@
 				D9D4C7DC1F825FE8000CC35A /* URL+Nix.swift in Sources */,
 				D92A5E9E1F5D906300B712FE /* ServerCall.swift in Sources */,
 				D9D4C7E11F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
+				D9D1CE0B207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */,
 				D9F1AA271F61847A007B081F /* URLEncoding.swift in Sources */,
 				D9D45E5F2078122200C83944 /* NixTrustDelegate.swift in Sources */,
 				D9F1AA1D1F616A13007B081F /* QuickCall.swift in Sources */,
@@ -509,6 +517,7 @@
 				D9D4C7DD1F825FE8000CC35A /* URL+Nix.swift in Sources */,
 				D92A5E9F1F5D906300B712FE /* ServerCall.swift in Sources */,
 				D9D4C7E21F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
+				D9D1CE0C207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */,
 				D9F1AA281F61847A007B081F /* URLEncoding.swift in Sources */,
 				D9D45E602078122200C83944 /* NixTrustDelegate.swift in Sources */,
 				D9F1AA1E1F616A13007B081F /* QuickCall.swift in Sources */,
@@ -527,6 +536,7 @@
 				D9D4C7DE1F825FE8000CC35A /* URL+Nix.swift in Sources */,
 				D92A5EA01F5D906300B712FE /* ServerCall.swift in Sources */,
 				D9D4C7E31F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
+				D9D1CE0D207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */,
 				D9F1AA291F61847A007B081F /* URLEncoding.swift in Sources */,
 				D9D45E612078122200C83944 /* NixTrustDelegate.swift in Sources */,
 				D9F1AA1F1F616A13007B081F /* QuickCall.swift in Sources */,

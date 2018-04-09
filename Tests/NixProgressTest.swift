@@ -9,6 +9,12 @@
 import XCTest
 @testable import Nix
 
+class FileDownloadCall: QuickCall {
+    override var type: ServerCall.CallType {
+        return .download
+    }
+}
+
 class NixProgressTest: XCTestCase {
     
     func testDownloadProgress() {
@@ -23,5 +29,25 @@ class NixProgressTest: XCTestCase {
         }
         
         waitForExpectations(timeout: 5, handler: nil)
+    }
+    
+    func testFileDownload() {
+        let expectFileDownload = expectation(description: "Call expected to download a file")
+        FileDownloadCall(URL(string: "http://httpbin.org/bytes/2048")!).success { (url) in
+            if let fileUrl = url as? URL {
+                if fileUrl.isFileURL {
+                    do {
+                        let data = try Data(contentsOf: fileUrl)
+                        if data.count == 2048 {
+                            expectFileDownload.fulfill()
+                        }
+                    } catch {}
+                }
+            }
+            }.failure { (error) in
+                print(error)
+        }
+        
+        waitForExpectations(timeout: 4, handler: nil)
     }
 }

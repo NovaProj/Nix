@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate {
+open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URLSessionDownloadDelegate {
     
     private var defaultSession: URLSession!
     private var tasks = [URLSessionTask: ServerCall]()
@@ -35,9 +35,12 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate {
         var task: URLSessionTask? = nil
         
         switch call.type {
-        case .data:
+            case .data:
                 task = defaultSession.dataTask(with: request)
-            
+                break
+            case .download:
+                task = defaultSession.downloadTask(with: request)
+                break
             default:
                 throw NixError.notImplemented
         }
@@ -59,6 +62,9 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate {
         return try call.parameterEncoding.encode(call)
     }
     
+    
+    // MARK: - Data task delegates
+    
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         tasks[dataTask]?.response = response
         if tasks[dataTask]?.onResponseReceived(response) ?? false {
@@ -77,14 +83,15 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate {
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         
         let call = tasks[dataTask]
-        if call?.data != nil {
-            call?.data?.append(data)
-        } else {
-            call?.data = data
+        if call?.stream == nil {
+            call?.stream = OutputStream(toMemory: ())
+            call?.stream?.open()
         }
         
-        call?.onDataReceived(bytesReceived: Int64(call!.data?.count ?? 0), totalBytesToBeReceived: call!.expectedDataSize)
-        call?.progressBlock?(Int64(call!.data?.count ?? 0), call!.expectedDataSize)
+        call?.stream?.write(data: data)
+        call?.receivedDataSize += Int64(data.count)
+        call?.onDataReceived(bytesReceived: call!.receivedDataSize, totalBytesToBeReceived: call!.expectedDataSize)
+        call?.progressBlock?(call!.receivedDataSize, call!.expectedDataSize)
     }
     
     public func urlSession(
@@ -124,7 +131,10 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate {
         let call = tasks.removeValue(forKey: task)
         
         // First - let's try to decode response that we have
-        if call?.data != nil {
+        call?.stream?.close()
+        let callData = call?.stream?.property(forKey: .dataWrittenToMemoryStreamKey) as? Data
+        
+        if callData != nil {
             let headers = (call?.response as? HTTPURLResponse)?.allHeaderFields
             let cT = headers?["Content-Type"] ?? headers?["Content-type"] ?? headers?["content-type"]
             
@@ -137,7 +147,7 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate {
                 let decoder = decoders[contentType.lowercased()]
                 
                 do {
-                    call?.responseObject = try decoder?.decode(call!.data!)
+                    call?.responseObject = try decoder?.decode(callData!)
                 } catch {
                     call?.failureBlock?(NixError.responseParseError)
                     call?.finalBlock?(false)
@@ -165,11 +175,39 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate {
             }
         } else {
             if realError == nil {
-                call?.successBlock?(call?.responseObject)
+                if call?.type == .data {
+                    call?.successBlock?(call?.responseObject)
+                }
             } else {
                 call?.failureBlock?(realError!)
             }
             call?.finalBlock?(realError == nil)
         }
+    }
+    
+    // MARK: - Download task delegates
+    public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        let call = tasks.removeValue(forKey: downloadTask)
+        
+        call?.successBlock?(location)
+        call?.finalBlock?(true)
+    }
+    
+    public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
+        let call = tasks[downloadTask]
+        call?.receivedDataSize = fileOffset
+        call?.expectedDataSize = expectedTotalBytes
+        
+        call?.onDataReceived(bytesReceived: fileOffset, totalBytesToBeReceived: expectedTotalBytes)
+        call?.progressBlock?(fileOffset, expectedTotalBytes)
+    }
+    
+    public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        let call = tasks[downloadTask]
+        call?.receivedDataSize = totalBytesWritten
+        call?.expectedDataSize = totalBytesExpectedToWrite
+        
+        call?.onDataReceived(bytesReceived: totalBytesWritten, totalBytesToBeReceived: totalBytesExpectedToWrite)
+        call?.progressBlock?(totalBytesWritten, totalBytesExpectedToWrite)
     }
 }

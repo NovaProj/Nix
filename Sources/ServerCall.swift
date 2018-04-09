@@ -73,6 +73,8 @@ open class ServerCall {
     open var status: Status = .idle
     
     public var expectedDataSize: Int64 = 0
+    public var receivedDataSize: Int64 = 0
+    public var stream: OutputStream? = nil
     public var data: Data? = nil
     public var responseObject: Any? = nil
     public var userData: Any? = nil
