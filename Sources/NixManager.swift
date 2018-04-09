@@ -62,6 +62,12 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate {
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         tasks[dataTask]?.response = response
         if tasks[dataTask]?.onResponseReceived(response) ?? false {
+            if let httpResponse = response as? HTTPURLResponse {
+                let expectedSize = Int64((httpResponse.allHeaderFields["Content-Length"] as? String) ?? "0") ?? 0
+                if expectedSize > 0 {
+                    tasks[dataTask]?.expectedDataSize = expectedSize
+                }
+            }
             completionHandler(.allow)
         } else {
             completionHandler(.cancel)
@@ -69,11 +75,16 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate {
     }
     
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-        if tasks[dataTask]?.data != nil {
-           tasks[dataTask]?.data?.append(data)
+        
+        let call = tasks[dataTask]
+        if call?.data != nil {
+            call?.data?.append(data)
         } else {
-            tasks[dataTask]?.data = data
+            call?.data = data
         }
+        
+        call?.onDataReceived(bytesReceived: Int64(call!.data?.count ?? 0), totalBytesToBeReceived: call!.expectedDataSize)
+        call?.progressBlock?(Int64(call!.data?.count ?? 0), call!.expectedDataSize)
     }
     
     public func urlSession(
@@ -99,6 +110,13 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate {
         }
         
         completionHandler(disposition, credential)
+    }
+    
+    public func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
+        let call = tasks[task]
+        
+        call?.onDataSent(bytesSent: totalBytesSent, totalBytesToBeSent: totalBytesExpectedToSend)
+        call?.progressBlock?(totalBytesSent, totalBytesExpectedToSend)
     }
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {

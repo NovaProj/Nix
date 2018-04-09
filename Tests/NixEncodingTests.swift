@@ -15,7 +15,7 @@ class NixEncodingTests: XCTestCase {
     func testSimpleXMLResultCall() {
         let xmlExpectation = self.expectation(description: "Call to generic GET request should finish with solid data")
         
-        QuickCall(URL(string: "https://httpbin.org/xml")!).success { (data) in
+        QuickCall(URL(string: "http://httpbin.org/xml")!).success { (data) in
             //Succeeded
             if data is XMLParser {
                 xmlExpectation.fulfill()

@@ -21,18 +21,18 @@ class BadParametersCall: InvalidCallMethodCall {
     }
     
     override var parameters: [String : Any]? {
-        return ["wrongParam": URL(string: "https://httpbin.org")!]
+        return ["wrongParam": URL(string: "http://httpbin.org")!]
     }
 }
 
 class SimpleMultipartCall: BadParametersCall {
     
     override var baseURLString: String {
-        return "http://localhost:8000"
+        return "http://httpbin.org"
     }
     
     override var path: String {
-        return ""
+        return "/post"
     }
     
     override var parameters: [String : Any]? {
@@ -94,17 +94,15 @@ class NixMultipartTests: XCTestCase {
             
             let responseDict = (data as! [String: Any])
             // Arguments
-            let arguments = responseDict["args"] as? [String: Any] ?? [String: Any]()
-            if let boolParam = arguments["boolParam"] as? Bool,
+            let arguments = responseDict["form"] as? [String: Any] ?? [String: Any]()
+            if let boolParam = arguments["boolParam"] as? String,
                let stringParam = arguments["stringParam"] as? String,
-               let numberParam = arguments["numberParam"] as? Int {
+               let numberParam = arguments["numberParam"] as? String {
                 
-                if boolParam && stringParam == "someString" && numberParam == 10 {
+                if boolParam == "true" && stringParam == "someString" && numberParam == "10" {
                     paramsExpectation.fulfill()
                 }
             }
-            }.failure { (error) in
-                print(error)
         }
         
         waitForExpectations(timeout: 2, handler: nil)
@@ -119,15 +117,15 @@ class NixMultipartTests: XCTestCase {
             
             let responseDict = (data as! [String: Any])
             // Arguments
-            let arguments = responseDict["args"] as? [String: Any] ?? [String: Any]()
-            if let stringParam = arguments["stringParam"] as? String {
+            let arguments = responseDict["form"] as? [String: Any] ?? [String: Any]()
+            let files = responseDict["files"] as? [String: Any] ?? [String: Any]()
+            if let stringParam = arguments["stringParam"] as? String,
+               let _ = files["fileParam"] as? String{
                 
                 if stringParam == "someString" {
                     paramsExpectation.fulfill()
                 }
             }
-            }.failure { (error) in
-                print(error)
         }
         
         waitForExpectations(timeout: 2, handler: nil)

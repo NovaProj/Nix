@@ -108,6 +108,7 @@ class MultipartFormDataStream: InputStream, StreamDelegate {
     private var streams = [InputStream]()
     
     let boundary: String = "NixBoundary" + String(randomWithLength: 20)
+    let contentSize: Int64
     
     override var hasBytesAvailable: Bool {
         if let stream = streams.first {
@@ -143,27 +144,38 @@ class MultipartFormDataStream: InputStream, StreamDelegate {
         // That means creating headers for every each one of them
         // And if one of them is.. well... bad, we need to throw an error
         var first = true
+        var contentLength: Int64 = 0
         for (key, value) in parameters {
             var stream: InputStream? = nil
             var filename: String? = nil
             var contentType: String? = nil
             
+            var data: Data? = nil
             if let bool = value as? Bool {
-                stream = InputStream(data: ((bool) ? "true" : "false").data(using: .utf8) ?? Data())
+                data = ((bool) ? "true" : "false").data(using: .utf8) ?? Data()
+                
             } else if let number = value as? NSNumber {
-                stream = InputStream(data: number.stringValue.data(using: .utf8) ?? Data())
+                data = number.stringValue.data(using: .utf8) ?? Data()
             } else if let string = value as? String {
-                stream = InputStream(data: string.data(using: .utf8) ?? Data())
-            } else if let data = value as? Data {
-                stream = InputStream(data: data)
+                data = string.data(using: .utf8) ?? Data()
+            } else if let theData = value as? Data {
+                data = theData
             } else  if let fileUrl = value as? URL {
                 if fileUrl.isFileURL {
+                    do {
+                        contentLength += try FileManager.default.attributesOfItem(atPath: fileUrl.path)[FileAttributeKey.size] as! Int64
+                    } catch {}
                     filename = fileUrl.lastPathComponent
                     stream = InputStream(url: fileUrl)
                     contentType = mimeTypes[fileUrl.pathExtension] ?? "application/octet-stream"
                 }
             } else if let theStream = value as? InputStream {
                 stream = theStream
+            }
+            
+            if data != nil {
+                contentLength += Int64(data!.count)
+                stream = InputStream(data: data!)
             }
             
             if stream == nil {
@@ -188,14 +200,21 @@ class MultipartFormDataStream: InputStream, StreamDelegate {
                 }
                 headerString += "\r\n"
 
-                let headerStream = InputStream(data: headerString.data(using: .utf8) ?? Data())
+                let headerData = headerString.data(using: .utf8) ?? Data()
+                
+                contentLength += Int64(headerData.count)
+                
+                let headerStream = InputStream(data: headerData)
                 streams.append(headerStream)
                 streams.append(stream!)
             }
         }
         
         // Last but not least - we need to append final boundary
-        streams.append(InputStream(data: "\r\n--\(boundary)--".data(using: .utf8) ?? Data()))
+        let finalData = "\r\n--\(boundary)--".data(using: .utf8) ?? Data()
+        contentLength += Int64(finalData.count)
+        streams.append(InputStream(data: finalData))
+        contentSize = contentLength
         
         super.init(data: Data())
     }
@@ -232,7 +251,7 @@ class MultipartFormDataStream: InputStream, StreamDelegate {
         
             switchStreamsIfNeeded()
         } while (readLen == 0 && streams.count > 1)
-        
+
         return readLen
     }
     
@@ -282,6 +301,7 @@ class MultipartFormDataEncoding: ParameterEncoding {
         
         let stream = try MultipartFormDataStream(call.parameters!)
         request.addValue("multipart/form-data; boundary=\(stream.boundary)", forHTTPHeaderField: "Content-Type")
+        request.addValue("\(stream.contentSize)", forHTTPHeaderField: "Content-Length")
         request.httpBodyStream = stream
         
         return request

@@ -72,6 +72,7 @@ open class ServerCall {
     
     open var status: Status = .idle
     
+    public var expectedDataSize: Int64 = 0
     public var data: Data? = nil
     public var responseObject: Any? = nil
     public var userData: Any? = nil
@@ -80,7 +81,7 @@ open class ServerCall {
     public var successBlock: ((Any?) -> Void)? = nil
     public var failureBlock: ((Error) -> Void)? = nil
     public var finalBlock: ((Bool) -> Void)? = nil
-    
+    public var progressBlock: ((Int64, Int64) -> Void)? = nil
     
     public init(executeNow: Bool = true) {
         if executeNow {
@@ -107,12 +108,27 @@ open class ServerCall {
         return true
     }
     
+    open func onDataSent(bytesSent: Int64, totalBytesToBeSent: Int64) {
+        
+    }
+
+    open func onDataReceived(bytesReceived: Int64, totalBytesToBeReceived: Int64) {
+        
+    }
+    
     open func onFinish(error: Error?) -> ServerCall? {
         
         // Try to parse content based on type received in the header
         
         return nil
     }
+    
+    @discardableResult open func progress(_ progress: @escaping (Int64, Int64) -> Void) -> ServerCall {
+        
+        progressBlock = progress
+        return self
+    }
+
     
     @discardableResult open func success(_ success: @escaping (Any?) -> Void) -> ServerCall {
         
@@ -131,7 +147,4 @@ open class ServerCall {
         finalBlock = finally
         return self
     }
-
-
-    
 }

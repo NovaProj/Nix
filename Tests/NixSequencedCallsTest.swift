@@ -12,7 +12,7 @@ import XCTest
 class TestCall: ServerCall {
     override var baseURLString: String {
         get {
-            return "https://httpbin.org"
+            return "http://httpbin.org"
         }
     }
 }

@@ -17,7 +17,7 @@ class NixBasicTests: XCTestCase {
         let parametersExpectation = self.expectation(description: "Call to generic GET request should parse parameters correctly")
         let finalExpectation = self.expectation(description: "All calls should finish with final block. Always.")
         
-        QuickCall(URL(string: "https://httpbin.org/get")!, parameters: ["stringTest": "test", "numberTest": 2]).success { (data) in
+        QuickCall(URL(string: "http://httpbin.org/get")!, parameters: ["stringTest": "test", "numberTest": 2]).success { (data) in
                 //Succeeded
             if data is [String: Any] {
                 httpExpectation.fulfill()
@@ -50,16 +50,17 @@ class NixBasicTests: XCTestCase {
         let parametersExpectation = self.expectation(description: "Call to generic POST request should parse parameters correctly")
         let finalExpectation = self.expectation(description: "All calls should finish with final block. Always.")
         
-        QuickCall(URL(string: "https://httpbin.org/post")!, method: .post, parameters: ["stringTest": "test", "numberTest": 2]).success { (data) in
+        QuickCall(URL(string: "http://httpbin.org/post")!, method: .post, parameters: ["stringTest": "test", "numberTest": 2]).success { (data) in
             //Succeeded
+            httpExpectation.fulfill()
             if data is [String: Any] {
-                httpExpectation.fulfill()
+
                 
                 let responseDict = (data as! [String: Any])
                 // Arguments
-                let arguments = responseDict["args"] as? [String: Any] ?? [String: Any]()
+                let arguments = responseDict["form"] as? [String: Any] ?? [String: Any]()
                 let headers = responseDict["headers"] as? [String: Any] ?? [String: Any]()
-                
+
                 if (headers["User-Agent"] as? String) == "Nix/1.0" {
                     headerExpectation.fulfill()
                 }
@@ -83,14 +84,14 @@ class NixBasicTests: XCTestCase {
         let parametersExpectation = self.expectation(description: "Call to generic PUT request should parse parameters correctly")
         let finalExpectation = self.expectation(description: "All calls should finish with final block. Always.")
         
-        QuickCall(URL(string: "https://httpbin.org/put")!, method: .put, parameters: ["stringTest": "test", "numberTest": 2]).success { (data) in
+        QuickCall(URL(string: "http://httpbin.org/put")!, method: .put, parameters: ["stringTest": "test", "numberTest": 2]).success { (data) in
             //Succeeded
             if data is [String: Any] {
                 httpExpectation.fulfill()
                 
                 let responseDict = (data as! [String: Any])
                 // Arguments
-                let arguments = responseDict["args"] as? [String: Any] ?? [String: Any]()
+                let arguments = responseDict["form"] as? [String: Any] ?? [String: Any]()
                 let headers = responseDict["headers"] as? [String: Any] ?? [String: Any]()
                 
                 if (headers["User-Agent"] as? String) == "Nix/1.0" {
@@ -116,14 +117,14 @@ class NixBasicTests: XCTestCase {
         let parametersExpectation = self.expectation(description: "Call to generic PATCH request should parse parameters correctly")
         let finalExpectation = self.expectation(description: "All calls should finish with final block. Always.")
         
-        QuickCall(URL(string: "https://httpbin.org/patch")!, method: .patch, parameters: ["stringTest": "test", "numberTest": 2]).success { (data) in
+        QuickCall(URL(string: "http://httpbin.org/patch")!, method: .patch, parameters: ["stringTest": "test", "numberTest": 2]).success { (data) in
             //Succeeded
             if data is [String: Any] {
                 httpExpectation.fulfill()
                 
                 let responseDict = (data as! [String: Any])
                 // Arguments
-                let arguments = responseDict["args"] as? [String: Any] ?? [String: Any]()
+                let arguments = responseDict["form"] as? [String: Any] ?? [String: Any]()
                 let headers = responseDict["headers"] as? [String: Any] ?? [String: Any]()
                 
                 if (headers["User-Agent"] as? String) == "Nix/1.0" {
@@ -149,14 +150,14 @@ class NixBasicTests: XCTestCase {
         let parametersExpectation = self.expectation(description: "Call to generic DELETE request should parse parameters correctly")
         let finalExpectation = self.expectation(description: "All calls should finish with final block. Always.")
         
-        QuickCall(URL(string: "https://httpbin.org/delete")!, method: .delete, parameters: ["stringTest": "test", "numberTest": 2]).success { (data) in
+        QuickCall(URL(string: "http://httpbin.org/delete")!, method: .delete, parameters: ["stringTest": "test", "numberTest": 2]).success { (data) in
             //Succeeded
             if data is [String: Any] {
                 httpExpectation.fulfill()
                 
                 let responseDict = (data as! [String: Any])
                 // Arguments
-                let arguments = responseDict["args"] as? [String: Any] ?? [String: Any]()
+                let arguments = responseDict["form"] as? [String: Any] ?? [String: Any]()
                 let headers = responseDict["headers"] as? [String: Any] ?? [String: Any]()
                 
                 if (headers["User-Agent"] as? String) == "Nix/1.0" {
@@ -180,7 +181,7 @@ class NixBasicTests: XCTestCase {
         let httpErrorExpectation = self.expectation(description: "Call should return 404 error")
         let finalExpectation = self.expectation(description: "All calls should finish with final block. Always.")
         
-        QuickCall(URL(string: "https://httpbin.org/status/404")!).failure { (error) in
+        QuickCall(URL(string: "http://httpbin.org/status/404")!).failure { (error) in
             
             if error is NixError {
                 switch error as? NixError ?? .unknown {
