@@ -21,6 +21,7 @@ Nix is an HTTP networking library written in Swift. On top of - already superb A
 - [x] Upload File / Data / Stream / MultipartFormData
 - [x] Upload and Download Progress Closures and Delegates with Progress
 - [x] Download File directly to stream
+- [x] Resume file downloads from Data or local file 
 - [x] HTTP Response Validation
 - [x] Documentation
 
@@ -120,7 +121,6 @@ At the end of the day, most of the projects I was doing lacked the structure for
 
 There's a lot of things that still has to be implemented in Nix. Most important ones are as follows:
 
-- [ ] Resume file downloads from Data or local file 
 - [ ] Authentication with URLCredential
 - [ ] Network Reachability
 - [ ] More tests
