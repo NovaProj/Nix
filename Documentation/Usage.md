@@ -7,7 +7,7 @@
 ```swift
 import Nix
 
-QuickCall(URL("string: https://httpbin.org/get")!)
+QuickCall(URL(string: "https://httpbin.org/get")!)
 ```
 
 This will simply call a given url. Simple as that. Call will be triggered automatically.
