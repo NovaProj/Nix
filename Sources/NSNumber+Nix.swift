@@ -1,5 +1,5 @@
 //
-//  NSNumberNix.swift
+//  NSNumber+Nix.swift
 //  Nix
 //
 //  Created by Bazyli Zygan on 06.04.2018.
