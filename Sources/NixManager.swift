@@ -50,7 +50,18 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
         }
         
         tasks[task!] = call
+        call.task = task
         task?.resume()
+    }
+    
+    public func cancel(_ call: ServerCall) throws {
+        if call.task != nil {
+            call.task?.cancel()
+            tasks.removeValue(forKey: call.task!)
+            DispatchQueue.main.async {
+                call.finalBlock?(false)
+            }            
+        }
     }
     
     public func register(decoder: ResponseDecoding) {

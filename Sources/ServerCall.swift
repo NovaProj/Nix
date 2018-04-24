@@ -85,7 +85,15 @@ open class ServerCall {
     public var finalBlock: ((Bool) -> Void)? = nil
     public var progressBlock: ((Int64, Int64) -> Void)? = nil
     
+    public var id: String
+    public var task: URLSessionTask?
+    
+    static open func ==(left: ServerCall, right: ServerCall) -> Bool {
+        return left.id == right.id
+    }
+
     public init(executeNow: Bool = true) {
+        id = String(randomWithLength: 16)
         if executeNow {
             DispatchQueue.main.async {
                 do {
@@ -97,13 +105,21 @@ open class ServerCall {
             }
         }
     }
-        
+    
     open func execute() throws {
         if status != .idle {
             throw NixError.alreadyRunning
         }
         
         try NixManager.shared.execute(self)
+    }
+    
+    open func cancel() throws {
+        if status != .running {
+            throw NixError.notRunning
+        }
+        
+        try NixManager.shared.cancel(self)
     }
     
     open func onResponseReceived(_ response: URLResponse) -> Bool {
