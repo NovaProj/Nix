@@ -14,6 +14,8 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
     private var tasks = [URLSessionTask: ServerCall]()
     private var decoders = [String: ResponseDecoding]()
     
+    var dispatchQueue = DispatchQueue.main
+    
     open static let shared: NixManager = {
         return NixManager()
     }()
@@ -134,7 +136,9 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
         let call = tasks[task]
         
         call?.onDataSent(bytesSent: totalBytesSent, totalBytesToBeSent: totalBytesExpectedToSend)
-        call?.progressBlock?(totalBytesSent, totalBytesExpectedToSend)
+        dispatchQueue.async {
+            call?.progressBlock?(totalBytesSent, totalBytesExpectedToSend)
+        }
     }
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
@@ -160,8 +164,10 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
                 do {
                     call?.responseObject = try decoder?.decode(callData!)
                 } catch {
-                    call?.failureBlock?(NixError.responseParseError)
-                    call?.finalBlock?(false)
+                    dispatchQueue.async {
+                        call?.failureBlock?(NixError.responseParseError)
+                        call?.finalBlock?(false)
+                    }
                     return
                 }
             }
@@ -185,14 +191,16 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
                 } catch {}
             }
         } else {
-            if realError == nil {
-                if call?.type == .data {
-                    call?.successBlock?(call?.responseObject)
+            dispatchQueue.async {
+                if realError == nil {
+                    if call?.type == .data {
+                        call?.successBlock?(call?.responseObject)
+                    }
+                } else {
+                    call?.failureBlock?(realError!)
                 }
-            } else {
-                call?.failureBlock?(realError!)
+                call?.finalBlock?(realError == nil)
             }
-            call?.finalBlock?(realError == nil)
         }
     }
     
@@ -200,8 +208,10 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
     public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         let call = tasks.removeValue(forKey: downloadTask)
         
-        call?.successBlock?(location)
-        call?.finalBlock?(true)
+        dispatchQueue.async {
+            call?.successBlock?(location)
+            call?.finalBlock?(true)
+        }
     }
     
     public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
@@ -209,8 +219,10 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
         call?.receivedDataSize = fileOffset
         call?.expectedDataSize = expectedTotalBytes
         
-        call?.onDataReceived(bytesReceived: fileOffset, totalBytesToBeReceived: expectedTotalBytes)
-        call?.progressBlock?(fileOffset, expectedTotalBytes)
+        dispatchQueue.async {
+            call?.onDataReceived(bytesReceived: fileOffset, totalBytesToBeReceived: expectedTotalBytes)
+            call?.progressBlock?(fileOffset, expectedTotalBytes)
+        }
     }
     
     public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
@@ -218,7 +230,9 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
         call?.receivedDataSize = totalBytesWritten
         call?.expectedDataSize = totalBytesExpectedToWrite
         
-        call?.onDataReceived(bytesReceived: totalBytesWritten, totalBytesToBeReceived: totalBytesExpectedToWrite)
-        call?.progressBlock?(totalBytesWritten, totalBytesExpectedToWrite)
+        dispatchQueue.async {
+            call?.onDataReceived(bytesReceived: totalBytesWritten, totalBytesToBeReceived: totalBytesExpectedToWrite)
+            call?.progressBlock?(totalBytesWritten, totalBytesExpectedToWrite)
+        }
     }
 }
