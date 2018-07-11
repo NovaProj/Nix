@@ -40,7 +40,7 @@ open class URLEncoding: ParameterEncoding {
     
     private var allowedCharacterSet = CharacterSet.urlQueryAllowed
     
-    open static var `default`: URLEncoding { return URLEncoding() }
+    public static var `default`: URLEncoding { return URLEncoding() }
     
     override init() {
         super.init()

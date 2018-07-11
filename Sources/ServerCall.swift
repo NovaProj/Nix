@@ -70,23 +70,35 @@ open class ServerCall {
         }
     }
     
+    open var responseDecoding: ResponseDecoding? {
+        get {
+            return nil
+        }
+    }
+    
+    open var errorDecoding: ErrorDecoding {
+        get {
+            return HTTPErrorDecoder.default
+        }
+    }
+    
     open var status: Status = .idle
     
-    public var expectedDataSize: Int64 = 0
-    public var receivedDataSize: Int64 = 0
-    public var stream: OutputStream? = nil
-    public var data: Data? = nil
-    public var responseObject: Any? = nil
-    public var userData: Any? = nil
-    public var response: URLResponse? = nil
+    open var expectedDataSize: Int64 = 0
+    open var receivedDataSize: Int64 = 0
+    open var stream: OutputStream? = nil
+    open var data: Data? = nil
+    open var responseObject: Any? = nil
+    open var userData: Any? = nil
+    open var response: URLResponse? = nil
     
-    public var successBlock: ((Any?) -> Void)? = nil
-    public var failureBlock: ((Error) -> Void)? = nil
-    public var finalBlock: ((Bool) -> Void)? = nil
-    public var progressBlock: ((Int64, Int64) -> Void)? = nil
+    open var successBlock: ((Any?) -> Void)? = nil
+    open var failureBlock: ((Error) -> Void)? = nil
+    open var finalBlock: ((Bool) -> Void)? = nil
+    open var progressBlock: ((Int64, Int64) -> Void)? = nil
     
-    public var id: String
-    public var task: URLSessionTask?
+    open var id: String
+    open var task: URLSessionTask?
     
     static open func ==(left: ServerCall, right: ServerCall) -> Bool {
         return left.id == right.id

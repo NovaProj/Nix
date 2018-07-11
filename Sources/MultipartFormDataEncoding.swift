@@ -104,13 +104,13 @@ internal let mimeTypes = [
     "avi": "video/x-msvideo"
 ]
 
-class MultipartFormDataStream: InputStream, StreamDelegate {
+open class MultipartFormDataStream: InputStream, StreamDelegate {
     private var streams = [InputStream]()
     
     let boundary: String = "NixBoundary" + String(randomWithLength: 20)
     let contentSize: Int64
     
-    override var hasBytesAvailable: Bool {
+    override open var hasBytesAvailable: Bool {
         if let stream = streams.first {
             return stream.hasBytesAvailable
         } else {
@@ -119,7 +119,7 @@ class MultipartFormDataStream: InputStream, StreamDelegate {
     }
     
     private var _delegate: StreamDelegate?
-    override var delegate: StreamDelegate? {
+    override open var delegate: StreamDelegate? {
         get {
             return _delegate
         }
@@ -129,11 +129,11 @@ class MultipartFormDataStream: InputStream, StreamDelegate {
         }
     }
     
-    override var streamStatus: Stream.Status {
+    override open var streamStatus: Stream.Status {
         return streams.first?.streamStatus ?? .atEnd
     }
     
-    override var streamError: Error? {
+    override open var streamError: Error? {
         return streams.first?.streamError
     }
     
@@ -219,31 +219,31 @@ class MultipartFormDataStream: InputStream, StreamDelegate {
         super.init(data: Data())
     }
     
-    override func open() {
+    override open func open() {
         streams.first?.open()
     }
     
-    override func close() {
+    override open func close() {
         streams.first?.close()
     }
     
-    override func schedule(in aRunLoop: RunLoop, forMode mode: RunLoopMode) {
+    override open func schedule(in aRunLoop: RunLoop, forMode mode: RunLoopMode) {
         for s in streams {
             s.schedule(in: aRunLoop, forMode: mode)
         }
     }
     
-    override func remove(from aRunLoop: RunLoop, forMode mode: RunLoopMode) {
+    override open func remove(from aRunLoop: RunLoop, forMode mode: RunLoopMode) {
         for s in streams {
             s.remove(from: aRunLoop, forMode: mode)
         }
     }
     
-    override func property(forKey key: Stream.PropertyKey) -> Any? {
+    override open func property(forKey key: Stream.PropertyKey) -> Any? {
         return streams.first?.property(forKey: key)
     }
     
-    override func read(_ buffer: UnsafeMutablePointer<UInt8>, maxLength len: Int) -> Int {
+    override open func read(_ buffer: UnsafeMutablePointer<UInt8>, maxLength len: Int) -> Int {
         
         var readLen: Int = 0
         repeat {
@@ -255,7 +255,7 @@ class MultipartFormDataStream: InputStream, StreamDelegate {
         return readLen
     }
     
-    func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
+    open func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
         switch eventCode {
             case .errorOccurred:
                 _delegate?.stream?(self, handle: .errorOccurred)
@@ -278,9 +278,9 @@ class MultipartFormDataStream: InputStream, StreamDelegate {
     }
 }
 
-class MultipartFormDataEncoding: ParameterEncoding {
+open class MultipartFormDataEncoding: ParameterEncoding {
 
-    open static var `default`: MultipartFormDataEncoding { return MultipartFormDataEncoding() }
+    public static var `default`: MultipartFormDataEncoding { return MultipartFormDataEncoding() }
     
     open override func encode(_ call: ServerCall) throws -> URLRequest {
         

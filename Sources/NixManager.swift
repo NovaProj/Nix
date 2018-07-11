@@ -159,7 +159,7 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
                 if let semiRange = contentType.range(of: ";") {
                     contentType.removeSubrange(semiRange.lowerBound..<contentType.endIndex)
                 }
-                let decoder = decoders[contentType.lowercased()]
+                let decoder = call?.responseDecoding ?? decoders[contentType.lowercased()]
                 
                 do {
                     call?.responseObject = try decoder?.decode(callData!)
@@ -174,9 +174,7 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
         }
         
         // There's a chance that lack of error doesn't mean there isn't one
-        let httpCode = (call?.response as? HTTPURLResponse)?.statusCode ?? 0
-        let realError = error ?? ((httpCode > 299) ? NixError.httpError(httpCode) : nil)
-        
+        let realError = call?.errorDecoding.decode(response: call?.response, error: error, data: call?.data)
         // Second - we need to check if that's over or not
         let continuityCall = call?.onFinish(error: realError)
         if continuityCall != nil {
