@@ -5,7 +5,7 @@
 //  Created by Bazyli Zygan on 11.07.2018.
 //
 
-import UIKit
+import Foundation
 
 public protocol ErrorDecoding {
     func decode(response: URLResponse?, error: Error?, data: Data?) -> Error?
