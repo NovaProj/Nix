@@ -25,6 +25,16 @@
 		D92A5EA01F5D906300B712FE /* ServerCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92A5E9C1F5D906300B712FE /* ServerCall.swift */; };
 		D945C045206E31A100679E3B /* NixSequencedCallsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D945C044206E31A100679E3B /* NixSequencedCallsTest.swift */; };
 		D959E76F207B81630047A958 /* NixProgressTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D959E76E207B81630047A958 /* NixProgressTest.swift */; };
+		D96DF847210226E3003169E1 /* JSONEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF845210226E3003169E1 /* JSONEncoding.swift */; };
+		D96DF848210226E3003169E1 /* JSONEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF845210226E3003169E1 /* JSONEncoding.swift */; };
+		D96DF849210226E3003169E1 /* JSONEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF845210226E3003169E1 /* JSONEncoding.swift */; };
+		D96DF84A210226E3003169E1 /* JSONEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF845210226E3003169E1 /* JSONEncoding.swift */; };
+		D96DF84B210226E3003169E1 /* JSONEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF845210226E3003169E1 /* JSONEncoding.swift */; };
+		D96DF84C210226E3003169E1 /* ErrorDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF846210226E3003169E1 /* ErrorDecoding.swift */; };
+		D96DF84D210226E3003169E1 /* ErrorDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF846210226E3003169E1 /* ErrorDecoding.swift */; };
+		D96DF84E210226E3003169E1 /* ErrorDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF846210226E3003169E1 /* ErrorDecoding.swift */; };
+		D96DF84F210226E3003169E1 /* ErrorDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF846210226E3003169E1 /* ErrorDecoding.swift */; };
+		D96DF850210226E3003169E1 /* ErrorDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF846210226E3003169E1 /* ErrorDecoding.swift */; };
 		D997E927200504AD001B4537 /* NixEncodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D997E926200504AC001B4537 /* NixEncodingTests.swift */; };
 		D9D1CE0A207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D1CE09207B9C3F00684FAD /* OutputStream+Nix.swift */; };
 		D9D1CE0B207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D1CE09207B9C3F00684FAD /* OutputStream+Nix.swift */; };
@@ -99,6 +109,8 @@
 		D945C06C206E5E3600679E3B /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 		D945C06E206E64A900679E3B /* Usage.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Usage.md; sourceTree = "<group>"; };
 		D959E76E207B81630047A958 /* NixProgressTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NixProgressTest.swift; sourceTree = "<group>"; };
+		D96DF845210226E3003169E1 /* JSONEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONEncoding.swift; sourceTree = "<group>"; };
+		D96DF846210226E3003169E1 /* ErrorDecoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorDecoding.swift; sourceTree = "<group>"; };
 		D997E926200504AC001B4537 /* NixEncodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NixEncodingTests.swift; sourceTree = "<group>"; };
 		D9D1CE09207B9C3F00684FAD /* OutputStream+Nix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OutputStream+Nix.swift"; sourceTree = "<group>"; };
 		D9D45E51207810B800C83944 /* MultipartFormDataEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormDataEncoding.swift; sourceTree = "<group>"; };
@@ -189,6 +201,8 @@
 				D92A5E9C1F5D906300B712FE /* ServerCall.swift */,
 				D9F1AA1B1F616A13007B081F /* QuickCall.swift */,
 				D9F1AA251F61847A007B081F /* URLEncoding.swift */,
+				D96DF846210226E3003169E1 /* ErrorDecoding.swift */,
+				D96DF845210226E3003169E1 /* JSONEncoding.swift */,
 				D9D45E51207810B800C83944 /* MultipartFormDataEncoding.swift */,
 				D9D4C7DF1F826BF4000CC35A /* ResponseDecoding.swift */,
 				D9D4C7D51F825F97000CC35A /* String+Nix.swift */,
@@ -473,6 +487,7 @@
 			files = (
 				D9D45E52207810B800C83944 /* MultipartFormDataEncoding.swift in Sources */,
 				D9D4C7D61F825F97000CC35A /* String+Nix.swift in Sources */,
+				D96DF847210226E3003169E1 /* JSONEncoding.swift in Sources */,
 				D92A5E931F5D8B3600B712FE /* Nix.swift in Sources */,
 				D9D45E58207811C000C83944 /* NSNumber+Nix.swift in Sources */,
 				D92A5E981F5D8FC800B712FE /* NixManager.swift in Sources */,
@@ -483,6 +498,7 @@
 				D9F1AA261F61847A007B081F /* URLEncoding.swift in Sources */,
 				D9D45E5E2078122200C83944 /* NixTrustDelegate.swift in Sources */,
 				D9F1AA1C1F616A13007B081F /* QuickCall.swift in Sources */,
+				D96DF84C210226E3003169E1 /* ErrorDecoding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +508,7 @@
 			files = (
 				D9D45E53207810B800C83944 /* MultipartFormDataEncoding.swift in Sources */,
 				D9D4C7D71F825F97000CC35A /* String+Nix.swift in Sources */,
+				D96DF848210226E3003169E1 /* JSONEncoding.swift in Sources */,
 				D92A5E941F5D8B3600B712FE /* Nix.swift in Sources */,
 				D9D45E59207811C000C83944 /* NSNumber+Nix.swift in Sources */,
 				D92A5E991F5D8FC800B712FE /* NixManager.swift in Sources */,
@@ -502,6 +519,7 @@
 				D9F1AA271F61847A007B081F /* URLEncoding.swift in Sources */,
 				D9D45E5F2078122200C83944 /* NixTrustDelegate.swift in Sources */,
 				D9F1AA1D1F616A13007B081F /* QuickCall.swift in Sources */,
+				D96DF84D210226E3003169E1 /* ErrorDecoding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,6 +529,7 @@
 			files = (
 				D9D45E54207810B800C83944 /* MultipartFormDataEncoding.swift in Sources */,
 				D9D4C7D81F825F97000CC35A /* String+Nix.swift in Sources */,
+				D96DF849210226E3003169E1 /* JSONEncoding.swift in Sources */,
 				D92A5E951F5D8B3600B712FE /* Nix.swift in Sources */,
 				D9D45E5A207811C000C83944 /* NSNumber+Nix.swift in Sources */,
 				D92A5E9A1F5D8FC800B712FE /* NixManager.swift in Sources */,
@@ -521,6 +540,7 @@
 				D9F1AA281F61847A007B081F /* URLEncoding.swift in Sources */,
 				D9D45E602078122200C83944 /* NixTrustDelegate.swift in Sources */,
 				D9F1AA1E1F616A13007B081F /* QuickCall.swift in Sources */,
+				D96DF84E210226E3003169E1 /* ErrorDecoding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,6 +550,7 @@
 			files = (
 				D9D45E55207810B800C83944 /* MultipartFormDataEncoding.swift in Sources */,
 				D9D4C7D91F825F97000CC35A /* String+Nix.swift in Sources */,
+				D96DF84A210226E3003169E1 /* JSONEncoding.swift in Sources */,
 				D92A5E961F5D8B3600B712FE /* Nix.swift in Sources */,
 				D9D45E5B207811C000C83944 /* NSNumber+Nix.swift in Sources */,
 				D92A5E9B1F5D8FC800B712FE /* NixManager.swift in Sources */,
@@ -540,6 +561,7 @@
 				D9F1AA291F61847A007B081F /* URLEncoding.swift in Sources */,
 				D9D45E612078122200C83944 /* NixTrustDelegate.swift in Sources */,
 				D9F1AA1F1F616A13007B081F /* QuickCall.swift in Sources */,
+				D96DF84F210226E3003169E1 /* ErrorDecoding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,10 +569,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D96DF84B210226E3003169E1 /* JSONEncoding.swift in Sources */,
 				D9D45E6420781C8400C83944 /* NixMultipartTests.swift in Sources */,
 				D997E927200504AD001B4537 /* NixEncodingTests.swift in Sources */,
 				D945C045206E31A100679E3B /* NixSequencedCallsTest.swift in Sources */,
 				D9D4C7D41F825733000CC35A /* NixBasicTests.swift in Sources */,
+				D96DF850210226E3003169E1 /* ErrorDecoding.swift in Sources */,
 				D9D45E5C207811C000C83944 /* NSNumber+Nix.swift in Sources */,
 				D959E76F207B81630047A958 /* NixProgressTest.swift in Sources */,
 			);

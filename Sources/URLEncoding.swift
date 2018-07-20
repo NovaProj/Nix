@@ -10,7 +10,7 @@ import Foundation
 
 open class ParameterEncoding {
     
-    init() {
+    public init() {
         
     }
     
