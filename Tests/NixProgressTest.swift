@@ -33,8 +33,8 @@ class NixProgressTest: XCTestCase {
     
     func testFileDownload() {
         let expectFileDownload = expectation(description: "Call expected to download a file")
-        FileDownloadCall(URL(string: "http://httpbin.org/bytes/2048")!).success { (url) in
-            if let fileUrl = url as? URL {
+        FileDownloadCall(URL(string: "http://httpbin.org/bytes/2048")!).success {
+            if let fileUrl = $0 as? URL {
                 if fileUrl.isFileURL {
                     do {
                         let data = try Data(contentsOf: fileUrl)
@@ -44,10 +44,10 @@ class NixProgressTest: XCTestCase {
                     } catch {}
                 }
             }
-            }.failure { (error) in
-                print(error)
+            }.failure {
+                print($0)
         }
         
-        waitForExpectations(timeout: 4, handler: nil)
+        waitForExpectations(timeout: 6, handler: nil)
     }
 }

@@ -29,12 +29,10 @@
 		D96DF848210226E3003169E1 /* JSONEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF845210226E3003169E1 /* JSONEncoding.swift */; };
 		D96DF849210226E3003169E1 /* JSONEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF845210226E3003169E1 /* JSONEncoding.swift */; };
 		D96DF84A210226E3003169E1 /* JSONEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF845210226E3003169E1 /* JSONEncoding.swift */; };
-		D96DF84B210226E3003169E1 /* JSONEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF845210226E3003169E1 /* JSONEncoding.swift */; };
 		D96DF84C210226E3003169E1 /* ErrorDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF846210226E3003169E1 /* ErrorDecoding.swift */; };
 		D96DF84D210226E3003169E1 /* ErrorDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF846210226E3003169E1 /* ErrorDecoding.swift */; };
 		D96DF84E210226E3003169E1 /* ErrorDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF846210226E3003169E1 /* ErrorDecoding.swift */; };
 		D96DF84F210226E3003169E1 /* ErrorDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF846210226E3003169E1 /* ErrorDecoding.swift */; };
-		D96DF850210226E3003169E1 /* ErrorDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF846210226E3003169E1 /* ErrorDecoding.swift */; };
 		D997E927200504AD001B4537 /* NixEncodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D997E926200504AC001B4537 /* NixEncodingTests.swift */; };
 		D9D1CE0A207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D1CE09207B9C3F00684FAD /* OutputStream+Nix.swift */; };
 		D9D1CE0B207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D1CE09207B9C3F00684FAD /* OutputStream+Nix.swift */; };
@@ -569,12 +567,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D96DF84B210226E3003169E1 /* JSONEncoding.swift in Sources */,
 				D9D45E6420781C8400C83944 /* NixMultipartTests.swift in Sources */,
 				D997E927200504AD001B4537 /* NixEncodingTests.swift in Sources */,
 				D945C045206E31A100679E3B /* NixSequencedCallsTest.swift in Sources */,
 				D9D4C7D41F825733000CC35A /* NixBasicTests.swift in Sources */,
-				D96DF850210226E3003169E1 /* ErrorDecoding.swift in Sources */,
 				D9D45E5C207811C000C83944 /* NSNumber+Nix.swift in Sources */,
 				D959E76F207B81630047A958 /* NixProgressTest.swift in Sources */,
 			);

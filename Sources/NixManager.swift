@@ -21,6 +21,7 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
     }()
     
     open var trustDelegate: NixTrustDelegate? = nil
+    open var trustedHosts: [String]?
     
     public override init() {
         super.init()
@@ -119,7 +120,7 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
             let host = challenge.protectionSpace.host
             
             if
-                (trustDelegate?.nixManager(self, shouldTrustHost: host) ?? false),
+                (trustedHosts?.contains(host) ?? false || trustDelegate?.nixManager(self, shouldTrustHost: host) ?? false),
                 let serverTrust = challenge.protectionSpace.serverTrust
             {
                 disposition = .useCredential
@@ -206,9 +207,18 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
     public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         let call = tasks.removeValue(forKey: downloadTask)
         
-        dispatchQueue.async {
-            call?.successBlock?(location)
-            call?.finalBlock?(true)
+        let tempUrl = URL(fileURLWithPath: NSTemporaryDirectory())
+            .appendingPathComponent(UUID().uuidString)
+            .appendingPathExtension("tmp")
+        do {try FileManager.default.moveItem(at: location, to: tempUrl)
+            dispatchQueue.async {
+                call?.successBlock?(tempUrl)
+                call?.finalBlock?(true)
+                do { try FileManager.default.removeItem(at: tempUrl) } catch {}
+            }
+        } catch let error {
+            call?.failureBlock?(error)
+            call?.finalBlock?(false)
         }
     }
     
