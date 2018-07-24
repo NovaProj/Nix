@@ -5,7 +5,7 @@
 //  Created by Bazyli Zygan on 20.07.2018.
 //
 
-import UIKit
+import Foundation
 
 class JSONEncoding: ParameterEncoding {
     
