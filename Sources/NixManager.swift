@@ -7,6 +7,7 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
     private var decoders = [String: ResponseDecoding]()
     
     var dispatchQueue = DispatchQueue.main
+    var logger: NixLogger?
     
     open static let shared: NixManager = {
         return NixManager()
@@ -47,6 +48,8 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
         
         tasks[task!] = call
         call.task = task
+        call.request = request
+        logger?.prepared(manager: self, call: call)
         task?.resume()
     }
     
@@ -54,7 +57,10 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
         if call.task != nil {
             call.task?.cancel()
             tasks.removeValue(forKey: call.task!)
-            DispatchQueue.main.async {
+            dispatchQueue.async { [weak self] in
+                if let s = self {
+                    s.logger?.finished(manager: s, call: call, withError: NixError.cancelled)
+                }
                 call.finalBlock?(false)
             }            
         }
@@ -74,6 +80,13 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
     
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         tasks[dataTask]?.response = response
+        if let realLogger = logger, let call = tasks[dataTask] {
+            dispatchQueue.async { [weak self] in
+                if let s = self {
+                    realLogger.receivedHeader(manager: s, forCall: call)
+                }
+            }
+        }
         if tasks[dataTask]?.onResponseReceived(response) ?? false {
             if let httpResponse = response as? HTTPURLResponse {
                 let expectedSize = Int64((httpResponse.allHeaderFields["Content-Length"] as? String) ?? "0") ?? 0
@@ -89,16 +102,18 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
     
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         
-        let call = tasks[dataTask]
-        if call?.stream == nil {
-            call?.stream = OutputStream(toMemory: ())
-            call?.stream?.open()
+        guard let call = tasks[dataTask] else {
+            return
+        }
+        if call.stream == nil {
+            call.stream = OutputStream(toMemory: ())
+            call.stream?.open()
         }
         
-        call?.stream?.write(data: data)
-        call?.receivedDataSize += Int64(data.count)
-        call?.onDataReceived(bytesReceived: call!.receivedDataSize, totalBytesToBeReceived: call!.expectedDataSize)
-        call?.progressBlock?(call!.receivedDataSize, call!.expectedDataSize)
+        call.stream?.write(data: data)
+        call.receivedDataSize += Int64(data.count)
+        call.onDataReceived(bytesReceived: call.receivedDataSize, totalBytesToBeReceived: call.expectedDataSize)
+        call.progressBlock?(call.receivedDataSize, call.expectedDataSize)
     }
     
     public func urlSession(
@@ -137,14 +152,16 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         // Unload data from savers
-        let call = tasks.removeValue(forKey: task)
+        guard let call = tasks.removeValue(forKey: task) else {
+            return
+        }
         
         // First - let's try to decode response that we have
-        call?.stream?.close()
-        let callData = call?.stream?.property(forKey: .dataWrittenToMemoryStreamKey) as? Data
+        call.stream?.close()
+        let callData = call.stream?.property(forKey: .dataWrittenToMemoryStreamKey) as? Data
         
         if callData != nil {
-            let headers = (call?.response as? HTTPURLResponse)?.allHeaderFields
+            let headers = (call.response as? HTTPURLResponse)?.allHeaderFields
             let cT = headers?["Content-Type"] ?? headers?["Content-type"] ?? headers?["content-type"]
             
             if cT is String {
@@ -153,14 +170,14 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
                 if let semiRange = contentType.range(of: ";") {
                     contentType.removeSubrange(semiRange.lowerBound..<contentType.endIndex)
                 }
-                let decoder = call?.responseDecoding ?? decoders[contentType.lowercased()]
+                let decoder = call.responseDecoding ?? decoders[contentType.lowercased()]
                 
                 do {
-                    call?.responseObject = try decoder?.decode(callData!)
+                    call.responseObject = try decoder?.decode(callData!)
                 } catch {
                     dispatchQueue.async {
-                        call?.failureBlock?(NixError.responseParseError)
-                        call?.finalBlock?(false)
+                        call.failureBlock?(NixError.responseParseError)
+                        call.finalBlock?(false)
                     }
                     return
                 }
@@ -168,14 +185,22 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
         }
         
         // There's a chance that lack of error doesn't mean there isn't one
-        let realError = call?.errorDecoding.decode(response: call?.response, error: error, data: callData)
+        let realError = call.errorDecoding.decode(response: call.response, error: error, data: callData)
+        call.data = callData
+        if let realLogger = logger {
+            dispatchQueue.async { [weak self] in
+                if let s = self {
+                    realLogger.finished(manager: s, call: call, withError: realError)
+                }
+            }
+        }
         // Second - we need to check if that's over or not
-        let continuityCall = call?.onFinish(error: realError)
+        let continuityCall = call.onFinish(error: realError)
         if continuityCall != nil {
-            continuityCall?.finalBlock = call?.finalBlock
-            continuityCall?.successBlock = call?.successBlock
-            continuityCall?.failureBlock = call?.failureBlock
-            continuityCall?.userData = call?.userData
+            continuityCall?.finalBlock = call.finalBlock
+            continuityCall?.successBlock = call.successBlock
+            continuityCall?.failureBlock = call.failureBlock
+            continuityCall?.userData = call.userData
             
             DispatchQueue.main.async {
                 do {
@@ -185,13 +210,13 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
         } else {
             dispatchQueue.async {
                 if realError == nil {
-                    if call?.type == .data {
-                        call?.successBlock?(call?.responseObject ?? callData)
+                    if call.type == .data {
+                        call.successBlock?(call.responseObject ?? callData)
                     }
                 } else {
-                    call?.failureBlock?(realError!)
+                    call.failureBlock?(realError!)
                 }
-                call?.finalBlock?(realError == nil)
+                call.finalBlock?(realError == nil)
             }
         }
     }

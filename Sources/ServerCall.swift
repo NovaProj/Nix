@@ -78,16 +78,17 @@ open class ServerCall {
     
     open var expectedDataSize: Int64 = 0
     open var receivedDataSize: Int64 = 0
-    open var stream: OutputStream? = nil
+    open var stream: OutputStream?
     open var data: Data? = nil
-    open var responseObject: Any? = nil
-    open var userData: Any? = nil
-    open var response: URLResponse? = nil
+    open var responseObject: Any?
+    open var userData: Any?
+    open var request: URLRequest?
+    open var response: URLResponse?
     
-    open var successBlock: ((Any?) -> Void)? = nil
-    open var failureBlock: ((Error) -> Void)? = nil
-    open var finalBlock: ((Bool) -> Void)? = nil
-    open var progressBlock: ((Int64, Int64) -> Void)? = nil
+    open var successBlock: ((Any?) -> Void)?
+    open var failureBlock: ((Error) -> Void)?
+    open var finalBlock: ((Bool) -> Void)?
+    open var progressBlock: ((Int64, Int64) -> Void)?
     
     open var id: String
     open var task: URLSessionTask?

@@ -33,6 +33,10 @@
 		D96DF84D210226E3003169E1 /* ErrorDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF846210226E3003169E1 /* ErrorDecoding.swift */; };
 		D96DF84E210226E3003169E1 /* ErrorDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF846210226E3003169E1 /* ErrorDecoding.swift */; };
 		D96DF84F210226E3003169E1 /* ErrorDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF846210226E3003169E1 /* ErrorDecoding.swift */; };
+		D9759D9821259695000F88BD /* NixLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9759D9721259695000F88BD /* NixLogger.swift */; };
+		D9759D9921259695000F88BD /* NixLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9759D9721259695000F88BD /* NixLogger.swift */; };
+		D9759D9A21259695000F88BD /* NixLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9759D9721259695000F88BD /* NixLogger.swift */; };
+		D9759D9B21259695000F88BD /* NixLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9759D9721259695000F88BD /* NixLogger.swift */; };
 		D997E927200504AD001B4537 /* NixEncodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D997E926200504AC001B4537 /* NixEncodingTests.swift */; };
 		D9D1CE0A207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D1CE09207B9C3F00684FAD /* OutputStream+Nix.swift */; };
 		D9D1CE0B207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D1CE09207B9C3F00684FAD /* OutputStream+Nix.swift */; };
@@ -109,6 +113,7 @@
 		D959E76E207B81630047A958 /* NixProgressTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NixProgressTest.swift; sourceTree = "<group>"; };
 		D96DF845210226E3003169E1 /* JSONEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONEncoding.swift; sourceTree = "<group>"; };
 		D96DF846210226E3003169E1 /* ErrorDecoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorDecoding.swift; sourceTree = "<group>"; };
+		D9759D9721259695000F88BD /* NixLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NixLogger.swift; sourceTree = "<group>"; };
 		D997E926200504AC001B4537 /* NixEncodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NixEncodingTests.swift; sourceTree = "<group>"; };
 		D9D1CE09207B9C3F00684FAD /* OutputStream+Nix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OutputStream+Nix.swift"; sourceTree = "<group>"; };
 		D9D45E51207810B800C83944 /* MultipartFormDataEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormDataEncoding.swift; sourceTree = "<group>"; };
@@ -208,6 +213,7 @@
 				D9D1CE09207B9C3F00684FAD /* OutputStream+Nix.swift */,
 				D9D45E57207811C000C83944 /* NSNumber+Nix.swift */,
 				D9D45E5D2078122200C83944 /* NixTrustDelegate.swift */,
+				D9759D9721259695000F88BD /* NixLogger.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -493,6 +499,7 @@
 				D92A5E9D1F5D906300B712FE /* ServerCall.swift in Sources */,
 				D9D4C7E01F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
 				D9D1CE0A207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */,
+				D9759D9821259695000F88BD /* NixLogger.swift in Sources */,
 				D9F1AA261F61847A007B081F /* URLEncoding.swift in Sources */,
 				D9D45E5E2078122200C83944 /* NixTrustDelegate.swift in Sources */,
 				D9F1AA1C1F616A13007B081F /* QuickCall.swift in Sources */,
@@ -514,6 +521,7 @@
 				D92A5E9E1F5D906300B712FE /* ServerCall.swift in Sources */,
 				D9D4C7E11F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
 				D9D1CE0B207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */,
+				D9759D9921259695000F88BD /* NixLogger.swift in Sources */,
 				D9F1AA271F61847A007B081F /* URLEncoding.swift in Sources */,
 				D9D45E5F2078122200C83944 /* NixTrustDelegate.swift in Sources */,
 				D9F1AA1D1F616A13007B081F /* QuickCall.swift in Sources */,
@@ -535,6 +543,7 @@
 				D92A5E9F1F5D906300B712FE /* ServerCall.swift in Sources */,
 				D9D4C7E21F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
 				D9D1CE0C207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */,
+				D9759D9A21259695000F88BD /* NixLogger.swift in Sources */,
 				D9F1AA281F61847A007B081F /* URLEncoding.swift in Sources */,
 				D9D45E602078122200C83944 /* NixTrustDelegate.swift in Sources */,
 				D9F1AA1E1F616A13007B081F /* QuickCall.swift in Sources */,
@@ -556,6 +565,7 @@
 				D92A5EA01F5D906300B712FE /* ServerCall.swift in Sources */,
 				D9D4C7E31F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
 				D9D1CE0D207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */,
+				D9759D9B21259695000F88BD /* NixLogger.swift in Sources */,
 				D9F1AA291F61847A007B081F /* URLEncoding.swift in Sources */,
 				D9D45E612078122200C83944 /* NixTrustDelegate.swift in Sources */,
 				D9F1AA1F1F616A13007B081F /* QuickCall.swift in Sources */,
