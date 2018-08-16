@@ -1,11 +1,3 @@
-//
-//  NixManager.swift
-//  Nix
-//
-//  Created by Bazyli Zygan on 04.09.2017.
-//  Copyright © 2017 Nova Project. All rights reserved.
-//
-
 import Foundation
 
 open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URLSessionDownloadDelegate {
@@ -44,6 +36,7 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
             case .download:
                 task = defaultSession.downloadTask(with: request)
                 break
+            
             default:
                 throw NixError.notImplemented
         }
@@ -175,7 +168,7 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
         }
         
         // There's a chance that lack of error doesn't mean there isn't one
-        let realError = call?.errorDecoding.decode(response: call?.response, error: error, data: call?.data)
+        let realError = call?.errorDecoding.decode(response: call?.response, error: error, data: callData)
         // Second - we need to check if that's over or not
         let continuityCall = call?.onFinish(error: realError)
         if continuityCall != nil {
@@ -193,7 +186,7 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
             dispatchQueue.async {
                 if realError == nil {
                     if call?.type == .data {
-                        call?.successBlock?(call?.responseObject)
+                        call?.successBlock?(call?.responseObject ?? callData)
                     }
                 } else {
                     call?.failureBlock?(realError!)

@@ -1,11 +1,3 @@
-//
-//  Nix.swift
-//  Nix
-//
-//  Created by Bazyli Zygan on 04.09.2017.
-//  Copyright © 2017 Nova Project. All rights reserved.
-//
-
 import Foundation
 
 public enum HTTPMethod: String {

@@ -1,13 +1,6 @@
-//
-//  JSONEncoding.swift
-//  Nix
-//
-//  Created by Bazyli Zygan on 20.07.2018.
-//
-
 import Foundation
 
-class JSONEncoding: ParameterEncoding {
+open class JSONEncoding: ParameterEncoding {
     
     public static var `default`: JSONEncoding { return JSONEncoding() }
     

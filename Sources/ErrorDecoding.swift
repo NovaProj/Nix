@@ -1,10 +1,3 @@
-//
-//  ErrorDecoding.swift
-//  Nix
-//
-//  Created by Bazyli Zygan on 11.07.2018.
-//
-
 import Foundation
 
 public protocol ErrorDecoding {

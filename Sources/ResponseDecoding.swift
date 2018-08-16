@@ -1,11 +1,3 @@
-//
-//  ResponseDecoding.swift
-//  Nix
-//
-//  Created by Bazyli Zygan on 02.10.2017.
-//  Copyright © 2017 Nova Project. All rights reserved.
-//
-
 open class ResponseDecoding {
     
     open var contentType: String {
