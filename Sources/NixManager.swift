@@ -6,8 +6,8 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
     private var tasks = [URLSessionTask: ServerCall]()
     private var decoders = [String: ResponseDecoding]()
     
-    var dispatchQueue = DispatchQueue.main
-    var logger: NixLogger?
+    open var dispatchQueue = DispatchQueue.main
+    open var logger: NixLogger?
     
     open static let shared: NixManager = {
         return NixManager()
