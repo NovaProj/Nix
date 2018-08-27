@@ -134,7 +134,7 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
                 disposition = .useCredential
                 credential = URLCredential(trust: serverTrust)
             } else {
-                disposition = .cancelAuthenticationChallenge
+                disposition = .performDefaultHandling
             }
         }
         
