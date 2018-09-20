@@ -93,7 +93,7 @@ open class ServerCall {
     open var id: String
     open var task: URLSessionTask?
     
-    static open func ==(left: ServerCall, right: ServerCall) -> Bool {
+    static public func ==(left: ServerCall, right: ServerCall) -> Bool {
         return left.id == right.id
     }
 

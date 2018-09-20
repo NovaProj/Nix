@@ -9,7 +9,7 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
     open var dispatchQueue = DispatchQueue.main
     open var logger: NixLogger?
     
-    open static let shared: NixManager = {
+    public static let shared: NixManager = {
         return NixManager()
     }()
     

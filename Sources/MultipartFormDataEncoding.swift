@@ -219,13 +219,13 @@ open class MultipartFormDataStream: InputStream, StreamDelegate {
         streams.first?.close()
     }
     
-    override open func schedule(in aRunLoop: RunLoop, forMode mode: RunLoopMode) {
+    override open func schedule(in aRunLoop: RunLoop, forMode mode: RunLoop.Mode) {
         for s in streams {
             s.schedule(in: aRunLoop, forMode: mode)
         }
     }
     
-    override open func remove(from aRunLoop: RunLoop, forMode mode: RunLoopMode) {
+    override open func remove(from aRunLoop: RunLoop, forMode mode: RunLoop.Mode) {
         for s in streams {
             s.remove(from: aRunLoop, forMode: mode)
         }
