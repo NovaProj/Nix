@@ -93,6 +93,14 @@ open class ServerCall {
     open var id: String
     open var task: URLSessionTask?
     
+    open var contentType: String? {
+        guard let headers = (response as? HTTPURLResponse)?.allHeaderFields else {
+            return nil
+        }
+        
+        return headers["Content-Type"] as? String ?? headers["Content-type"] as? String ?? headers["content-type"] as? String
+    }
+    
     static public func ==(left: ServerCall, right: ServerCall) -> Bool {
         return left.id == right.id
     }
@@ -125,6 +133,10 @@ open class ServerCall {
         }
         
         try NixManager.shared.cancel(self)
+    }
+    
+    open func onCallPrepared() -> Bool {
+        return true
     }
     
     open func onResponseReceived(_ response: URLResponse) -> Bool {

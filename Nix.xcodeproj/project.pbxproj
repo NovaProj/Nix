@@ -24,6 +24,22 @@
 		D92A5E9F1F5D906300B712FE /* ServerCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92A5E9C1F5D906300B712FE /* ServerCall.swift */; };
 		D92A5EA01F5D906300B712FE /* ServerCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92A5E9C1F5D906300B712FE /* ServerCall.swift */; };
 		D945C045206E31A100679E3B /* NixSequencedCallsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D945C044206E31A100679E3B /* NixSequencedCallsTest.swift */; };
+		D94AA0F121578C670012FAE0 /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA0F021578C670012FAE0 /* MD5.swift */; };
+		D94AA0F221578C670012FAE0 /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA0F021578C670012FAE0 /* MD5.swift */; };
+		D94AA0F321578C670012FAE0 /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA0F021578C670012FAE0 /* MD5.swift */; };
+		D94AA0F421578C670012FAE0 /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA0F021578C670012FAE0 /* MD5.swift */; };
+		D94AA0FC21578E930012FAE0 /* NixCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA0F621578E930012FAE0 /* NixCache.swift */; };
+		D94AA0FD21578E930012FAE0 /* NixCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA0F621578E930012FAE0 /* NixCache.swift */; };
+		D94AA0FE21578E930012FAE0 /* NixCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA0F621578E930012FAE0 /* NixCache.swift */; };
+		D94AA0FF21578E930012FAE0 /* NixCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA0F621578E930012FAE0 /* NixCache.swift */; };
+		D94AA10021578E930012FAE0 /* CachedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA0F721578E930012FAE0 /* CachedCall.swift */; };
+		D94AA10121578E930012FAE0 /* CachedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA0F721578E930012FAE0 /* CachedCall.swift */; };
+		D94AA10221578E930012FAE0 /* CachedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA0F721578E930012FAE0 /* CachedCall.swift */; };
+		D94AA10321578E930012FAE0 /* CachedCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA0F721578E930012FAE0 /* CachedCall.swift */; };
+		D94AA1082157A6790012FAE0 /* L1Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA1072157A6790012FAE0 /* L1Cache.swift */; };
+		D94AA1092157A6790012FAE0 /* L1Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA1072157A6790012FAE0 /* L1Cache.swift */; };
+		D94AA10A2157A6790012FAE0 /* L1Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA1072157A6790012FAE0 /* L1Cache.swift */; };
+		D94AA10B2157A6790012FAE0 /* L1Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA1072157A6790012FAE0 /* L1Cache.swift */; };
 		D959E76F207B81630047A958 /* NixProgressTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D959E76E207B81630047A958 /* NixProgressTest.swift */; };
 		D96DF847210226E3003169E1 /* JSONEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF845210226E3003169E1 /* JSONEncoding.swift */; };
 		D96DF848210226E3003169E1 /* JSONEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF845210226E3003169E1 /* JSONEncoding.swift */; };
@@ -110,6 +126,10 @@
 		D945C06B206E41DB00679E3B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		D945C06C206E5E3600679E3B /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 		D945C06E206E64A900679E3B /* Usage.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Usage.md; sourceTree = "<group>"; };
+		D94AA0F021578C670012FAE0 /* MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
+		D94AA0F621578E930012FAE0 /* NixCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NixCache.swift; sourceTree = "<group>"; };
+		D94AA0F721578E930012FAE0 /* CachedCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedCall.swift; sourceTree = "<group>"; };
+		D94AA1072157A6790012FAE0 /* L1Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L1Cache.swift; sourceTree = "<group>"; };
 		D959E76E207B81630047A958 /* NixProgressTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NixProgressTest.swift; sourceTree = "<group>"; };
 		D96DF845210226E3003169E1 /* JSONEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONEncoding.swift; sourceTree = "<group>"; };
 		D96DF846210226E3003169E1 /* ErrorDecoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorDecoding.swift; sourceTree = "<group>"; };
@@ -197,6 +217,9 @@
 		D92A5E831F5D866600B712FE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D94AA1072157A6790012FAE0 /* L1Cache.swift */,
+				D94AA0F721578E930012FAE0 /* CachedCall.swift */,
+				D94AA0F621578E930012FAE0 /* NixCache.swift */,
 				D92A5E861F5D86A000B712FE /* Info.plist */,
 				D92A5E851F5D86A000B712FE /* Nix.h */,
 				D92A5E921F5D8B3600B712FE /* Nix.swift */,
@@ -214,6 +237,7 @@
 				D9D45E57207811C000C83944 /* NSNumber+Nix.swift */,
 				D9D45E5D2078122200C83944 /* NixTrustDelegate.swift */,
 				D9759D9721259695000F88BD /* NixLogger.swift */,
+				D94AA0F021578C670012FAE0 /* MD5.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -495,14 +519,18 @@
 				D96DF847210226E3003169E1 /* JSONEncoding.swift in Sources */,
 				D92A5E931F5D8B3600B712FE /* Nix.swift in Sources */,
 				D9D45E58207811C000C83944 /* NSNumber+Nix.swift in Sources */,
+				D94AA1082157A6790012FAE0 /* L1Cache.swift in Sources */,
 				D92A5E981F5D8FC800B712FE /* NixManager.swift in Sources */,
 				D9D4C7DB1F825FE8000CC35A /* URL+Nix.swift in Sources */,
 				D92A5E9D1F5D906300B712FE /* ServerCall.swift in Sources */,
+				D94AA10021578E930012FAE0 /* CachedCall.swift in Sources */,
 				D9D4C7E01F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
 				D9D1CE0A207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */,
+				D94AA0F121578C670012FAE0 /* MD5.swift in Sources */,
 				D9759D9821259695000F88BD /* NixLogger.swift in Sources */,
 				D9F1AA261F61847A007B081F /* URLEncoding.swift in Sources */,
 				D9D45E5E2078122200C83944 /* NixTrustDelegate.swift in Sources */,
+				D94AA0FC21578E930012FAE0 /* NixCache.swift in Sources */,
 				D9F1AA1C1F616A13007B081F /* QuickCall.swift in Sources */,
 				D96DF84C210226E3003169E1 /* ErrorDecoding.swift in Sources */,
 			);
@@ -517,14 +545,18 @@
 				D96DF848210226E3003169E1 /* JSONEncoding.swift in Sources */,
 				D92A5E941F5D8B3600B712FE /* Nix.swift in Sources */,
 				D9D45E59207811C000C83944 /* NSNumber+Nix.swift in Sources */,
+				D94AA1092157A6790012FAE0 /* L1Cache.swift in Sources */,
 				D92A5E991F5D8FC800B712FE /* NixManager.swift in Sources */,
 				D9D4C7DC1F825FE8000CC35A /* URL+Nix.swift in Sources */,
 				D92A5E9E1F5D906300B712FE /* ServerCall.swift in Sources */,
+				D94AA10121578E930012FAE0 /* CachedCall.swift in Sources */,
 				D9D4C7E11F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
 				D9D1CE0B207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */,
+				D94AA0F221578C670012FAE0 /* MD5.swift in Sources */,
 				D9759D9921259695000F88BD /* NixLogger.swift in Sources */,
 				D9F1AA271F61847A007B081F /* URLEncoding.swift in Sources */,
 				D9D45E5F2078122200C83944 /* NixTrustDelegate.swift in Sources */,
+				D94AA0FD21578E930012FAE0 /* NixCache.swift in Sources */,
 				D9F1AA1D1F616A13007B081F /* QuickCall.swift in Sources */,
 				D96DF84D210226E3003169E1 /* ErrorDecoding.swift in Sources */,
 			);
@@ -539,14 +571,18 @@
 				D96DF849210226E3003169E1 /* JSONEncoding.swift in Sources */,
 				D92A5E951F5D8B3600B712FE /* Nix.swift in Sources */,
 				D9D45E5A207811C000C83944 /* NSNumber+Nix.swift in Sources */,
+				D94AA10A2157A6790012FAE0 /* L1Cache.swift in Sources */,
 				D92A5E9A1F5D8FC800B712FE /* NixManager.swift in Sources */,
 				D9D4C7DD1F825FE8000CC35A /* URL+Nix.swift in Sources */,
 				D92A5E9F1F5D906300B712FE /* ServerCall.swift in Sources */,
+				D94AA10221578E930012FAE0 /* CachedCall.swift in Sources */,
 				D9D4C7E21F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
 				D9D1CE0C207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */,
+				D94AA0F321578C670012FAE0 /* MD5.swift in Sources */,
 				D9759D9A21259695000F88BD /* NixLogger.swift in Sources */,
 				D9F1AA281F61847A007B081F /* URLEncoding.swift in Sources */,
 				D9D45E602078122200C83944 /* NixTrustDelegate.swift in Sources */,
+				D94AA0FE21578E930012FAE0 /* NixCache.swift in Sources */,
 				D9F1AA1E1F616A13007B081F /* QuickCall.swift in Sources */,
 				D96DF84E210226E3003169E1 /* ErrorDecoding.swift in Sources */,
 			);
@@ -561,14 +597,18 @@
 				D96DF84A210226E3003169E1 /* JSONEncoding.swift in Sources */,
 				D92A5E961F5D8B3600B712FE /* Nix.swift in Sources */,
 				D9D45E5B207811C000C83944 /* NSNumber+Nix.swift in Sources */,
+				D94AA10B2157A6790012FAE0 /* L1Cache.swift in Sources */,
 				D92A5E9B1F5D8FC800B712FE /* NixManager.swift in Sources */,
 				D9D4C7DE1F825FE8000CC35A /* URL+Nix.swift in Sources */,
 				D92A5EA01F5D906300B712FE /* ServerCall.swift in Sources */,
+				D94AA10321578E930012FAE0 /* CachedCall.swift in Sources */,
 				D9D4C7E31F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
 				D9D1CE0D207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */,
+				D94AA0F421578C670012FAE0 /* MD5.swift in Sources */,
 				D9759D9B21259695000F88BD /* NixLogger.swift in Sources */,
 				D9F1AA291F61847A007B081F /* URLEncoding.swift in Sources */,
 				D9D45E612078122200C83944 /* NixTrustDelegate.swift in Sources */,
+				D94AA0FF21578E930012FAE0 /* NixCache.swift in Sources */,
 				D9F1AA1F1F616A13007B081F /* QuickCall.swift in Sources */,
 				D96DF84F210226E3003169E1 /* ErrorDecoding.swift in Sources */,
 			);
@@ -655,6 +695,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -710,6 +751,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
