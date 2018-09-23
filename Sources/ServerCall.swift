@@ -151,33 +151,33 @@ open class ServerCall {
         
     }
     
-    open func onFinish(error: Error?) -> ServerCall? {
+    open func onFinish(error: Error?) -> Self? {
         
         // Try to parse content based on type received in the header
         
         return nil
     }
     
-    @discardableResult open func progress(_ progress: @escaping (Int64, Int64) -> Void) -> ServerCall {
+    @discardableResult open func progress(_ progress: @escaping (Int64, Int64) -> Void) -> Self {
         
         progressBlock = progress
         return self
     }
 
     
-    @discardableResult open func success(_ success: @escaping (Any?) -> Void) -> ServerCall {
+    @discardableResult open func success(_ success: @escaping (Any?) -> Void) -> Self {
         
         successBlock = success
         return self
     }
 
-    @discardableResult open func failure(_ failure: @escaping (Error) -> Void) -> ServerCall {
+    @discardableResult open func failure(_ failure: @escaping (Error) -> Void) -> Self {
         
         failureBlock = failure
         return self
     }
     
-    @discardableResult open func finally(_ finally: @escaping (Bool) -> Void) -> ServerCall {
+    @discardableResult open func finally(_ finally: @escaping (Bool) -> Void) -> Self {
         
         finalBlock = finally
         return self
