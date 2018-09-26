@@ -151,7 +151,7 @@ open class ServerCall {
         
     }
     
-    open func onFinish(error: Error?) -> Self? {
+    open func onFinish(error: Error?) -> ServerCall? {
         
         // Try to parse content based on type received in the header
         
