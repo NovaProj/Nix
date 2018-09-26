@@ -40,6 +40,10 @@
 		D94AA1092157A6790012FAE0 /* L1Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA1072157A6790012FAE0 /* L1Cache.swift */; };
 		D94AA10A2157A6790012FAE0 /* L1Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA1072157A6790012FAE0 /* L1Cache.swift */; };
 		D94AA10B2157A6790012FAE0 /* L1Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA1072157A6790012FAE0 /* L1Cache.swift */; };
+		D94AA135215A5D190012FAE0 /* L1L2Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA134215A5D190012FAE0 /* L1L2Cache.swift */; };
+		D94AA136215A5D190012FAE0 /* L1L2Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA134215A5D190012FAE0 /* L1L2Cache.swift */; };
+		D94AA137215A5D190012FAE0 /* L1L2Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA134215A5D190012FAE0 /* L1L2Cache.swift */; };
+		D94AA138215A5D190012FAE0 /* L1L2Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94AA134215A5D190012FAE0 /* L1L2Cache.swift */; };
 		D959E76F207B81630047A958 /* NixProgressTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D959E76E207B81630047A958 /* NixProgressTest.swift */; };
 		D96DF847210226E3003169E1 /* JSONEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF845210226E3003169E1 /* JSONEncoding.swift */; };
 		D96DF848210226E3003169E1 /* JSONEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DF845210226E3003169E1 /* JSONEncoding.swift */; };
@@ -130,6 +134,7 @@
 		D94AA0F621578E930012FAE0 /* NixCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NixCache.swift; sourceTree = "<group>"; };
 		D94AA0F721578E930012FAE0 /* CachedCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedCall.swift; sourceTree = "<group>"; };
 		D94AA1072157A6790012FAE0 /* L1Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L1Cache.swift; sourceTree = "<group>"; };
+		D94AA134215A5D190012FAE0 /* L1L2Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L1L2Cache.swift; sourceTree = "<group>"; };
 		D959E76E207B81630047A958 /* NixProgressTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NixProgressTest.swift; sourceTree = "<group>"; };
 		D96DF845210226E3003169E1 /* JSONEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONEncoding.swift; sourceTree = "<group>"; };
 		D96DF846210226E3003169E1 /* ErrorDecoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorDecoding.swift; sourceTree = "<group>"; };
@@ -218,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				D94AA1072157A6790012FAE0 /* L1Cache.swift */,
+				D94AA134215A5D190012FAE0 /* L1L2Cache.swift */,
 				D94AA0F721578E930012FAE0 /* CachedCall.swift */,
 				D94AA0F621578E930012FAE0 /* NixCache.swift */,
 				D92A5E861F5D86A000B712FE /* Info.plist */,
@@ -523,6 +529,7 @@
 				D92A5E981F5D8FC800B712FE /* NixManager.swift in Sources */,
 				D9D4C7DB1F825FE8000CC35A /* URL+Nix.swift in Sources */,
 				D92A5E9D1F5D906300B712FE /* ServerCall.swift in Sources */,
+				D94AA135215A5D190012FAE0 /* L1L2Cache.swift in Sources */,
 				D94AA10021578E930012FAE0 /* CachedCall.swift in Sources */,
 				D9D4C7E01F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
 				D9D1CE0A207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */,
@@ -549,6 +556,7 @@
 				D92A5E991F5D8FC800B712FE /* NixManager.swift in Sources */,
 				D9D4C7DC1F825FE8000CC35A /* URL+Nix.swift in Sources */,
 				D92A5E9E1F5D906300B712FE /* ServerCall.swift in Sources */,
+				D94AA136215A5D190012FAE0 /* L1L2Cache.swift in Sources */,
 				D94AA10121578E930012FAE0 /* CachedCall.swift in Sources */,
 				D9D4C7E11F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
 				D9D1CE0B207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */,
@@ -575,6 +583,7 @@
 				D92A5E9A1F5D8FC800B712FE /* NixManager.swift in Sources */,
 				D9D4C7DD1F825FE8000CC35A /* URL+Nix.swift in Sources */,
 				D92A5E9F1F5D906300B712FE /* ServerCall.swift in Sources */,
+				D94AA137215A5D190012FAE0 /* L1L2Cache.swift in Sources */,
 				D94AA10221578E930012FAE0 /* CachedCall.swift in Sources */,
 				D9D4C7E21F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
 				D9D1CE0C207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */,
@@ -601,6 +610,7 @@
 				D92A5E9B1F5D8FC800B712FE /* NixManager.swift in Sources */,
 				D9D4C7DE1F825FE8000CC35A /* URL+Nix.swift in Sources */,
 				D92A5EA01F5D906300B712FE /* ServerCall.swift in Sources */,
+				D94AA138215A5D190012FAE0 /* L1L2Cache.swift in Sources */,
 				D94AA10321578E930012FAE0 /* CachedCall.swift in Sources */,
 				D9D4C7E31F826BF4000CC35A /* ResponseDecoding.swift in Sources */,
 				D9D1CE0D207B9C3F00684FAD /* OutputStream+Nix.swift in Sources */,

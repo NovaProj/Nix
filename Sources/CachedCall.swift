@@ -39,8 +39,8 @@ open class CachedCall: ServerCall {
         }
         return true
     }
-        
-    override open func onFinish(error: Error?) -> ServerCall? {
+    
+    override open func onFinish(error: Error?) -> Self? {
         if error == nil {
             // Cache response
             guard let response = response,

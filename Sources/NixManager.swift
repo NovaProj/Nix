@@ -21,7 +21,10 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
     public override init() {
         super.init()
         defaultSession = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
-        cache = L1Cache()
+        
+        // Set default cache control manager
+        cache = L1L2Cache()
+        
         // Register known decoders
         register(decoder: JSONDecoding())
         register(decoder: XMLDecoding())

@@ -28,4 +28,11 @@ extension URL {
             }
         }
     }
+    
+    static func cacheFolderUrl() -> URL? {
+        if let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first {
+            return url
+        }
+        return nil
+    }
 }
