@@ -31,6 +31,10 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
     }
     
     public func execute(_ call: ServerCall) throws {
+        guard call.isValid else {
+            close(call: call, error: NixError.invalid, data: nil)
+            return
+        }
         
         let request = try buildRequest(call)
         var futureTask: URLSessionTask? = nil
@@ -245,29 +249,33 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
                 }
             }
         }
+        
+        close(call: call, error: realError, data: callData)
         // Second - we need to check if that's over or not
-        let continuityCall = call.onFinish(error: realError)
-        if continuityCall != nil {
-            continuityCall?.finalBlock = call.finalBlock
-            continuityCall?.successBlock = call.successBlock
-            continuityCall?.failureBlock = call.failureBlock
-            continuityCall?.userData = call.userData
+
+    }
+    
+    private func close(call: ServerCall, error: Error?, data: Data?) {
+        
+        if let continuityCall = call.onFinish(error: error) {
+            continuityCall.finalBlock = call.finalBlock
+            continuityCall.successBlock = call.successBlock
+            continuityCall.failureBlock = call.failureBlock
+            continuityCall.userData = call.userData
             
             DispatchQueue.main.async {
-                do {
-                    try self.execute(continuityCall!)
-                } catch {}
+                try? self.execute(continuityCall)
             }
         } else {
             dispatchQueue.async {
-                if realError == nil {
-                    if call.type == .data {
-                        call.successBlock?(call.responseObject ?? callData)
-                    }
+                if let error = error {
+                    call.failureBlock?(error)
                 } else {
-                    call.failureBlock?(realError!)
+                    if call.type == .data {
+                        call.successBlock?(call.responseObject ?? data)
+                    }
                 }
-                call.finalBlock?(realError == nil)
+                call.finalBlock?(error == nil)
             }
         }
     }

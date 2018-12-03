@@ -74,6 +74,10 @@ open class ServerCall {
         }
     }
     
+    open var isValid: Bool {
+        return true
+    }
+    
     open var status: Status = .idle
     
     open var expectedDataSize: Int64 = 0

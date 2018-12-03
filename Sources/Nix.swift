@@ -21,6 +21,7 @@ public enum NixError: Error {
     case notRunning
     case invalidParameters([String: Any])
     case invalidCallMethod
+    case invalid
     case timeout(URL)
     case cancelled
     case unknown
