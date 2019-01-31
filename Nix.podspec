@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name = 'Nix'
-    s.version = '1.0.2'
+    s.version = '1.0.3'
     s.license = 'MIT'
     s.summary = 'Network Interface eXtension for easy and structured API calls'
     s.homepage = 'https://github.com/NovaProj/Nix'

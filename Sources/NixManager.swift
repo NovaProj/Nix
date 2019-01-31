@@ -36,6 +36,10 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
             return
         }
         
+        guard call.status == .idle else {
+            throw NixError.invalid
+        }
+        
         let request = try buildRequest(call)
         var futureTask: URLSessionTask? = nil
         

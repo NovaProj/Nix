@@ -6,6 +6,7 @@ open class ServerCall {
         case idle = "idle"
         case running = "running"
         case finished = "finished"
+        case cancelled = "cancelled"
     }
     
     public enum CallType: String {
@@ -124,18 +125,22 @@ open class ServerCall {
     }
     
     open func execute() throws {
-        if status != .idle {
-            throw NixError.alreadyRunning
+        guard status == .idle else {
+            if status == .cancelled {
+                throw NixError.cancelled
+            } else {
+                throw NixError.alreadyRunning
+            }
         }
         
         try NixManager.shared.execute(self)
     }
     
     open func cancel() throws {
-        if status != .running {
+        guard status != .finished else {
             throw NixError.notRunning
         }
-        
+        status = .cancelled
         try NixManager.shared.cancel(self)
     }
     
