@@ -80,7 +80,6 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
                 if let s = self {
                     s.logger?.finished(manager: s, call: call, withError: NixError.cancelled)
                 }
-                call.finalBlock?(false)
             }            
         }
     }
