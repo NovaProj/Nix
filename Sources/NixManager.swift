@@ -63,6 +63,7 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
         call.task = task
         call.request = request
         logger?.prepared(manager: self, call: call)
+        call.status = .running
         if call.onCallPrepared() {
             task.resume()
         } else {
@@ -164,7 +165,9 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
         
         call?.onDataSent(bytesSent: totalBytesSent, totalBytesToBeSent: totalBytesExpectedToSend)
         dispatchQueue.async {
-            call?.progressBlock?(totalBytesSent, totalBytesExpectedToSend)
+            if let call = call, call.status == .running {
+                call.progressBlock?(totalBytesSent, totalBytesExpectedToSend)
+            }
         }
     }
     
@@ -186,13 +189,17 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
             .appendingPathExtension("tmp")
         do {try FileManager.default.moveItem(at: location, to: tempUrl)
             dispatchQueue.async {
-                call?.successBlock?(tempUrl)
-                call?.finalBlock?(true)
+                guard let call = call, call.status == .running else { return }
+                call.successBlock?(tempUrl)
+                call.finalBlock?(true)
+                call.status = .finished
                 do { try FileManager.default.removeItem(at: tempUrl) } catch {}
             }
         } catch let error {
-            call?.failureBlock?(error)
-            call?.finalBlock?(false)
+            guard let call = call, call.status == .running else { return }
+            call.failureBlock?(error)
+            call.finalBlock?(false)
+            call.status = .finished
         }
     }
     
@@ -202,8 +209,9 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
         call?.expectedDataSize = expectedTotalBytes
         
         dispatchQueue.async {
-            call?.onDataReceived(bytesReceived: fileOffset, totalBytesToBeReceived: expectedTotalBytes)
-            call?.progressBlock?(fileOffset, expectedTotalBytes)
+            guard let call = call, call.status == .running else { return }
+            call.onDataReceived(bytesReceived: fileOffset, totalBytesToBeReceived: expectedTotalBytes)
+            call.progressBlock?(fileOffset, expectedTotalBytes)
         }
     }
     
@@ -213,8 +221,9 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
         call?.expectedDataSize = totalBytesExpectedToWrite
         
         dispatchQueue.async {
-            call?.onDataReceived(bytesReceived: totalBytesWritten, totalBytesToBeReceived: totalBytesExpectedToWrite)
-            call?.progressBlock?(totalBytesWritten, totalBytesExpectedToWrite)
+            guard let call = call, call.status == .running else { return }
+            call.onDataReceived(bytesReceived: totalBytesWritten, totalBytesToBeReceived: totalBytesExpectedToWrite)
+            call.progressBlock?(totalBytesWritten, totalBytesExpectedToWrite)
         }
     }
     
@@ -235,8 +244,10 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
                     call.responseObject = try decoder?.decode(callData!)
                 } catch {
                     dispatchQueue.async {
+                        guard call.status == .running else { return }
                         call.failureBlock?(NixError.responseParseError)
                         call.finalBlock?(false)
+                        call.status = .finished
                     }
                     return
                 }
@@ -248,6 +259,7 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
         call.data = callData
         if let realLogger = logger {
             dispatchQueue.async { [weak self] in
+                guard call.status == .running else { return }
                 if let s = self {
                     realLogger.finished(manager: s, call: call, withError: realError)
                 }
@@ -255,8 +267,6 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
         }
         
         close(call: call, error: realError, data: callData)
-        // Second - we need to check if that's over or not
-
     }
     
     private func close(call: ServerCall, error: Error?, data: Data?) {
@@ -268,10 +278,16 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
             continuityCall.userData = call.userData
             
             DispatchQueue.main.async {
+                guard continuityCall.status == .idle else {
+                    return
+                }
                 try? self.execute(continuityCall)
             }
         } else {
             dispatchQueue.async {
+                guard call.status == .running else {
+                    return
+                }
                 if let error = error {
                     call.failureBlock?(error)
                 } else {
@@ -280,6 +296,7 @@ open class NixManager: NSObject, URLSessionDelegate, URLSessionDataDelegate, URL
                     }
                 }
                 call.finalBlock?(error == nil)
+                call.status = .finished
             }
         }
     }
